@@ -1,15 +1,23 @@
 // userController.ts
 
 import { Request, Response } from "express";
-import { User } from "../models/User";
+import { User, isUser } from "../models/User";
 import { UserService } from "../services/UserService";
 
 export class UserController {
   private userService = new UserService();
 
   createUser = (req: Request, res: Response) => {
-    const newUser = this.userService.create(req.body as User);
-    res.json(newUser);
+    // Create a new User instance
+    const newUser = new User(req.body);
+
+    const createdUser = this.userService.create(newUser);
+
+    if (isUser(createdUser)) {
+      res.status(201).json(createdUser);
+    } else {
+      res.status(400).send("Invalid user data");
+    }
   };
 
   getUser = (req: Request, res: Response) => {
