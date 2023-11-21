@@ -1,13 +1,18 @@
 // userController.ts
 
 import { Request, Response } from "express";
-import { User, isUser } from "../models/User";
+import { User, isUser, isValidUserEmail } from "../models/User";
 import { UserService } from "../services/UserService";
 
 export class UserController {
   private userService = new UserService();
 
   createUser = (req: Request, res: Response) => {
+    const [isValid, message] = isValidUserEmail(req.body.email);
+    if (!isValid) {
+      res.status(400).json({ isValid, message });
+    }
+
     // Create a new User instance
     const newUser = new User(req.body);
 

@@ -1,4 +1,4 @@
-// Generic service class implementation
+// feature #6: Generic service class implementation
 
 import { IDataService } from "./IDataService";
 

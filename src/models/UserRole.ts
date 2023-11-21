@@ -1,4 +1,4 @@
-// Enums for UserRole
+// feature #4: Enums for UserRole
 
 export enum UserRole {
   Admin = "ADMIN",

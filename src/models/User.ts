@@ -1,6 +1,6 @@
 import { UserRole } from "./UserRole";
 
-// 1. Interface for User (demonstrates TypeScript's interface feature)
+// feature #2: Interface for User
 interface IUser {
   id: number;
   name: string;
@@ -32,7 +32,7 @@ class User implements IUser {
   }
 }
 
-// Implement type guards
+// feature #7: Implement type guards
 function isUser(obj: any): obj is User {
   return (
     obj instanceof User &&
@@ -44,4 +44,15 @@ function isUser(obj: any): obj is User {
   );
 }
 
-export { IUser, User, isUser };
+// feature #8. Tuples in TypeScript
+function isValidUserEmail(email: string): [boolean, string] {
+  const isValid = email.includes("@"); // Simple email validation
+  const message = isValid ? "Valid user email" : "Invalid user email";
+  return [isValid, message];
+}
+
+function getItems<T>(items: T[]): T[] {
+  return items;
+}
+
+export { IUser, User, isUser, isValidUserEmail };
