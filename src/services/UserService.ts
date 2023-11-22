@@ -15,7 +15,8 @@ export class UserService extends GenericDataService<User> {
     // feature 9#: Union types
     TypeScript will only allow an operation if it is valid for every member of the union. For example, 
     if you have the union string | string[], you can’t use methods that are only available on string.
-    In below function, you can run 'toUpperCase' method only when it's a single string and not array
+    In below function, you can run 'toUpperCase' method only when it's a single string and not array.
+    And the conditional check inside the method (using Array.isArray) is a typical pattern when working with Union Types.
   */
   normalizeHobbiesInput(input: string | string[]): string[] {
     if (!Array.isArray(input)) {
