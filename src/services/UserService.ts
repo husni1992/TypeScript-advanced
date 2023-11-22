@@ -1,6 +1,6 @@
-// UserService.ts
+// feature #3: Classes, UserService.ts
 
-import { User, IUser } from "../models/User";
+import { User } from "../models/User";
 import { GenericService } from "./common/GenericService";
 
 /**
