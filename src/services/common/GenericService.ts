@@ -1,8 +1,8 @@
 // feature #6: Generic service class implementation
 
-import { IDataService } from "./IDataService";
+import { DataService } from "./IDataService";
 
-export class GenericService<T> implements IDataService<T> {
+export class GenericDataService<T> implements DataService<T> {
   private items: T[] = [];
 
   create(item: T): T {

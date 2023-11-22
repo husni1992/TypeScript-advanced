@@ -1,58 +1,62 @@
 import { UserRole } from "./UserRole";
 
-// feature #2: Interface for User
-interface IUser {
-  id: number;
-  name: string;
+export interface EmailContact {
   email: string;
-  role: UserRole;
+}
+
+export interface PhoneContact {
   // Optional property, Typescript's nullable types
   phoneNumber?: string;
 }
 
-// 2. Class implementing the IUser interface (demonstrates TypeScript's class and type annotation features)
-class User implements IUser {
-  id: number;
+// feature #2: Interface for User
+export interface User {
+  // feature 9#: Union types
+  id: number | string;
   name: string;
-  email: string;
   role: UserRole;
-  phoneNumber?: string;
+  // feature 9# Intersection types
+  contact: EmailContact & PhoneContact;
+  hobbies: string[];
+}
 
-  constructor({ id, name, email, role, phoneNumber }: IUser) {
+// 2. Class implementing the User interface (demonstrates TypeScript's class and type annotation features)
+export class User implements User {
+  id: number | string;
+  name: string;
+  contact: EmailContact & PhoneContact;
+  role: UserRole;
+  hobbies: string[];
+
+  constructor({ id, name, role, contact, hobbies }: User) {
     this.id = id;
     this.name = name;
-    this.email = email;
+    this.contact = contact;
     this.role = role;
-    this.phoneNumber = phoneNumber;
-  }
-
-  // Example of a method (demonstrates TypeScript's method feature)
-  greet() {
-    return `Hello, my name is ${this.name}`;
+    this.hobbies = hobbies;
   }
 }
 
 // feature #7: Implement type guards
-function isUser(obj: any): obj is User {
+export function isUser(obj: any): obj is User {
   return (
-    obj instanceof User &&
-    typeof obj.id === "number" &&
-    typeof obj.name === "string" &&
-    typeof obj.email === "string" &&
-    typeof obj.phoneNumber === "string" &&
-    Object.values(UserRole).includes(obj.role)
+    (obj instanceof User && typeof obj.id === "number") ||
+    (typeof obj.id === "string" &&
+      typeof obj.name === "string" &&
+      typeof obj.contact.email === "string" &&
+      typeof obj.contact.phoneNumber === "string" &&
+      Object.values(UserRole).includes(obj.role))
   );
 }
 
-// feature #8. Tuples in TypeScript
-function isValidUserEmail(email: string): [boolean, string] {
+// feature #8. Tuples
+export function isValidUserEmail(email: string): [boolean, string] {
   const isValid = email.includes("@"); // Simple email validation
   const message = isValid ? "Valid user email" : "Invalid user email";
   return [isValid, message];
 }
 
-function getItems<T>(items: T[]): T[] {
+// feature #6: Generic functions
+export function getItems<T>(items: T[]): T[] {
   return items;
 }
-
-export { IUser, User, isUser, isValidUserEmail };

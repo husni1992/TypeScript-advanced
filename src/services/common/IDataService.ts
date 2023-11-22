@@ -1,6 +1,6 @@
 // Generic interface
 
-export interface IDataService<T> {
+export interface DataService<T> {
   create(item: T): T;
   getAll(): T[];
   getById(id: string): T | undefined;
