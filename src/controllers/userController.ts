@@ -1,7 +1,7 @@
 // userController.ts
 
 import { Request, Response } from "express";
-import { User, isValidUserEmail } from "../models/User";
+import { User, checkAvailableAuthLevelOfUser, isValidUserEmail } from "../models/User";
 import { UserService } from "../services/UserService";
 
 export class UserController {
@@ -60,5 +60,10 @@ export class UserController {
     user.hobbies.push(...normalizedHobbies);
 
     res.status(200).send("Hobbies updated!");
+  };
+
+  checkAvailableAuthLevelOfUser = (req: Request, res: Response) => {
+    const result = checkAvailableAuthLevelOfUser(req.params.id);
+    res.status(200).send(result);
   };
 }

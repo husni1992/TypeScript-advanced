@@ -1,15 +1,19 @@
 import { UserRole } from "./Types";
 
-export interface EmailContact {
+interface EmailContact {
   email: string;
 }
 
-export interface PhoneContact {
+interface PhoneContact {
   // Optional property, Typescript's nullable types
   phoneNumber?: string;
 }
 
-// feature #10: Implementing Literal Types in TypeScript
+// feature #9 Intersection types
+type ContactInfo = EmailContact & PhoneContact;
+
+// feature #12: Type alias
+// Type Aliases allow defining types with a custom name (an Alias). In this example it's UserStatus
 type UserStatus = "ACTIVE" | "INACTIVE" | "PENDING";
 
 // feature #2: Interface for User
@@ -18,8 +22,7 @@ export interface User {
   id: number | string;
   name: string;
   role: UserRole;
-  // feature #9 Intersection types
-  contact: EmailContact & PhoneContact;
+  contact: ContactInfo;
   hobbies: string[];
   status: UserStatus;
 }
@@ -28,7 +31,7 @@ export interface User {
 export class User implements User {
   id: number | string;
   name: string;
-  contact: EmailContact & PhoneContact;
+  contact: ContactInfo;
   role: UserRole;
   hobbies: string[];
 
@@ -40,7 +43,7 @@ export class User implements User {
     this.hobbies = hobbies;
   }
 
-  // feature #7: Implement type guards for validating user inputs
+  // feature #7.1: Implement User-defined type guard for validating user inputs
   static isUser(obj: any): obj is User {
     return (
       typeof obj.id === "string" &&
@@ -52,7 +55,7 @@ export class User implements User {
   }
 
   /**
-   * // feature #7: User-defined type guard for UserStatus.
+   * // feature #7.2: User-defined type guard for UserStatus.
    * This method checks if the given status is a valid UserStatus.
    * If it returns true, TypeScript infers that the status is of type UserStatus within the scope it's used.
    * This helps in type narrowing, allowing for more type-safe code.
@@ -81,6 +84,12 @@ export function isValidUserEmail(email: string): [boolean, string] {
   const isValid = email.includes("@"); // Simple email validation
   const message = isValid ? "Valid user email" : "Invalid user email";
   return [isValid, message];
+}
+
+// feature #10: Literal Types
+// It enables string values as valid return types.
+export function checkAvailableAuthLevelOfUser(id: string): "READ" | "WRITE" | "DELETE" | "ADMIN" {
+  return "READ";
 }
 
 // feature #6: Generic functions
