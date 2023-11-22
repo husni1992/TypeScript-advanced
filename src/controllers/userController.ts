@@ -1,7 +1,7 @@
 // userController.ts
 
 import { Request, Response } from "express";
-import { User, isUser, isValidUserEmail } from "../models/User";
+import { User, isValidUserEmail } from "../models/User";
 import { UserService } from "../services/UserService";
 
 export class UserController {
@@ -11,18 +11,25 @@ export class UserController {
     const [isValid, message] = isValidUserEmail(req.body.contact.email);
     if (!isValid) {
       res.status(400).json({ isValid, message });
+      return;
+    }
+
+    const userStatus = req.body.status;
+
+    if (!User.isValidStatus(userStatus)) {
+      res.status(400).send("Invalid status!");
+      return;
     }
 
     // Create a new User instance
     const newUser = new User(req.body);
 
-    const createdUser = this.userService.create(newUser);
-
-    if (!isUser(createdUser)) {
-      res.status(400).send("Invalid user data");
+    if (!User.isUser(newUser)) {
+      res.status(400).send("Invalid user data!");
       return;
     }
 
+    const createdUser = this.userService.create(newUser);
     res.status(201).json(createdUser);
   };
 

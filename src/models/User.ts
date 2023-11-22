@@ -1,4 +1,4 @@
-import { UserRole } from "./UserRole";
+import { UserRole } from "./Types";
 
 export interface EmailContact {
   email: string;
@@ -9,15 +9,19 @@ export interface PhoneContact {
   phoneNumber?: string;
 }
 
+// feature #10: Implementing Literal Types in TypeScript
+type UserStatus = "ACTIVE" | "INACTIVE" | "PENDING";
+
 // feature #2: Interface for User
 export interface User {
   // feature 9#: Union types
   id: number | string;
   name: string;
   role: UserRole;
-  // feature 9# Intersection types
+  // feature #9 Intersection types
   contact: EmailContact & PhoneContact;
   hobbies: string[];
+  status: UserStatus;
 }
 
 // 2. Class implementing the User interface (demonstrates TypeScript's class and type annotation features)
@@ -35,18 +39,41 @@ export class User implements User {
     this.role = role;
     this.hobbies = hobbies;
   }
-}
 
-// feature #7: Implement type guards
-export function isUser(obj: any): obj is User {
-  return (
-    (obj instanceof User && typeof obj.id === "number") ||
-    (typeof obj.id === "string" &&
+  // feature #7: Implement type guards for validating user inputs
+  static isUser(obj: any): obj is User {
+    return (
+      typeof obj.id === "string" &&
       typeof obj.name === "string" &&
       typeof obj.contact.email === "string" &&
       typeof obj.contact.phoneNumber === "string" &&
-      Object.values(UserRole).includes(obj.role))
-  );
+      Object.values(UserRole).includes(obj.role)
+    );
+  }
+
+  /**
+   * // feature #7: User-defined type guard for UserStatus.
+   * This method checks if the given status is a valid UserStatus.
+   * If it returns true, TypeScript infers that the status is of type UserStatus within the scope it's used.
+   * This helps in type narrowing, allowing for more type-safe code.
+   *
+   * Example:
+   * if (User.isValidStatus(someStatus)) {
+   *     // Here, TypeScript knows someStatus is of type UserStatus
+   * }
+   *
+   * if we define return type as boolean at line 74, then
+   * if (User.isValidStatus(someStatus)) {
+   *     // Here, TypeScript does NOT know the specific type of someStatus
+   *     // It could still be 'any'
+   * }
+   *
+   * @param status - The status to be checked.
+   * @returns A boolean indicating if the status is a valid UserStatus.
+   */
+  static isValidStatus(status: any): status is UserStatus {
+    return ["active", "inactive", "pending"].includes(status);
+  }
 }
 
 // feature #8. Tuples
