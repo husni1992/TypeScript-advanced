@@ -5,7 +5,7 @@ interface EmailContact {
 }
 
 interface PhoneContact {
-  // Optional property, Typescript's nullable types
+  // feature #11 Optional property, Typescript's nullable types
   phoneNumber?: string;
 }
 
@@ -92,7 +92,7 @@ export function checkAvailableAuthLevelOfUser(id: string): "READ" | "WRITE" | "D
   return "READ";
 }
 
-// feature #6: Generic functions
+// feature #6.1: Generic functions
 export function getItems<T>(items: T[]): T[] {
   return items;
 }
