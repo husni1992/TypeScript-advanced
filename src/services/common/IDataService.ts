@@ -1,9 +1,10 @@
-// Generic interface
+// feature #6.3: Generic interface
+
+import { GenericPartialType } from "../../interfaces/ICrudDatabase";
 
 export interface DataService<T> {
-  create(item: T): T;
-  getAll(): T[];
-  getById(id: string): T | undefined;
-  update(id: string, item: T): T | undefined;
-  delete(id: string): void;
+  create(item: T): Promise<T>;
+  getById(id: string): Promise<T | undefined>;
+  update(id: string, item: GenericPartialType<T>): Promise<T | undefined>;
+  delete(id: string): Promise<void>;
 }
