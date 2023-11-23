@@ -1,17 +1,18 @@
 // feature #3: Classes, UserService.ts
 
 import { User } from "../models/User";
+import { MockCrudDatabase } from "./Database";
 import { GenericDataService } from "./common/GenericService";
 
 /**
  * Service class for user-related operations, extending GenericService
  */
 export class UserService extends GenericDataService<User> {
-  constructor() {
-    super();
+  constructor(repository: MockCrudDatabase<User>) {
+    super(repository);
   }
 
-  /*
+  /* 
     // feature 9#: Union types
     TypeScript will only allow an operation if it is valid for every member of the union. For example, 
     if you have the union string | string[], you can’t use methods that are only available on string.
