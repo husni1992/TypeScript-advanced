@@ -1,33 +1,47 @@
-// feature #6: Generic service class implementation
+// feature #6.2: Generic service class implementation
 
+import { GenericPartialType, IMockCrudDatabase } from "../../interfaces/ICrudDatabase";
 import { DataService } from "./IDataService";
 
 export class GenericDataService<T> implements DataService<T> {
-  private items: T[] = [];
+  private repository: IMockCrudDatabase<T>;
 
-  create(item: T): T {
-    this.items.push(item);
-    return item;
+  constructor(repository: IMockCrudDatabase<T>) {
+    this.repository = repository;
   }
 
-  getAll(): T[] {
-    return this.items;
-  }
-
-  getById(id: string): T | undefined {
-    return this.items.find((item) => (item as any).id == id);
-  }
-
-  update(id: string, item: T): T | undefined {
-    const index = this.items.findIndex((i) => (i as any).id === id);
-    if (index !== -1) {
-      this.items[index] = item;
-      return item;
+  async create(item: T): Promise<T> {
+    try {
+      return this.repository.create(item);
+    } catch (err) {
+      // TODO: Refactor errors
+      throw new Error("Failed creating record!");
     }
-    return undefined;
   }
 
-  delete(id: string): void {
-    this.items = this.items.filter((item) => (item as any).id !== id);
+  async getById(id: string): Promise<T | undefined> {
+    // return this.items.find((item) => (item as any).id == id);
+    try {
+      return this.repository.getById(id);
+    } catch (err) {
+      throw new Error("Failed getting item by id!");
+    }
+  }
+
+  async update(id: string, item: GenericPartialType<T>): Promise<T | undefined> {
+    try {
+      return this.repository.update(id, item);
+    } catch (err) {
+      throw new Error("Failed update!");
+    }
+  }
+
+  async delete(id: string): Promise<void> {
+    try {
+      await this.repository.delete(id);
+      console.log("Successfully deleted!");
+    } catch (err) {
+      throw new Error("Delete failed!");
+    }
   }
 }
