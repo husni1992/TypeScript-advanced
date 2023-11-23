@@ -26,7 +26,7 @@ export interface IMockCrudDatabase<ItemType> {
    * @param item The updated information.
    * @returns The updated item.
    */
-  update(id: string | number, item: PartialType<ItemType>): Promise<ItemType>;
+  update(id: string | number, item: GenericPartialType<ItemType>): Promise<ItemType>;
 
   /**
    * Deletes an item from the database.
@@ -36,6 +36,6 @@ export interface IMockCrudDatabase<ItemType> {
   delete(id: string | number): Promise<boolean>;
 }
 
-type PartialType<Type> = {
+export type GenericPartialType<Type> = {
   [Property in keyof Type]?: Type[Property];
 };
