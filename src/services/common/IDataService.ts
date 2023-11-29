@@ -1,6 +1,6 @@
-// feature #6.3: Generic interface
+// feature #6 Generic interface
 
-import { GenericPartialType } from "../../interfaces/ICrudDatabase";
+import { GenericPartialType } from "../../types";
 
 export interface DataService<T> {
   create(item: T): Promise<T>;

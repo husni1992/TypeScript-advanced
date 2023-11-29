@@ -1,12 +1,14 @@
-// feature #6.2: Generic service class implementation
+// feature #6 Generic service class implementation
 
-import { GenericPartialType, IMockCrudDatabase } from "../../interfaces/ICrudDatabase";
+import { IGenericDatabase } from "../../interfaces/IGenericDatabase";
+import { GenericPartialType } from "../../types";
+
 import { DataService } from "./IDataService";
 
 export class GenericDataService<T> implements DataService<T> {
-  private repository: IMockCrudDatabase<T>;
+  private repository: IGenericDatabase<T>;
 
-  constructor(repository: IMockCrudDatabase<T>) {
+  constructor(repository: IGenericDatabase<T>) {
     this.repository = repository;
   }
 

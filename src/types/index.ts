@@ -12,7 +12,7 @@
  * This utility is useful for creating types that are variations of existing ones, particularly in scenarios where
  * certain properties need to remain mandatory while others become optional.
  */
-export type LatestGenericPartialType<Type, MandatoryProperties extends keyof Type = never> = {
+export type GenericPartialType<Type, MandatoryProperties extends keyof Type = never> = {
   [Property in Exclude<keyof Type, MandatoryProperties>]?: Type[Property];
 } & {
   [Property in MandatoryProperties]: Type[Property];

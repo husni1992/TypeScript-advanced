@@ -1,6 +1,7 @@
-import { GenericPartialType, IMockCrudDatabase } from "../interfaces/ICrudDatabase";
+import { IGenericDatabase } from "../interfaces/IGenericDatabase";
+import { GenericPartialType } from "../types";
 
-export class MockCrudDatabase<ItemType> implements IMockCrudDatabase<ItemType> {
+export class MockCrudDatabase<ItemType> implements IGenericDatabase<ItemType> {
   private storage: ItemType[] = [];
 
   async create(item: ItemType): Promise<ItemType> {
