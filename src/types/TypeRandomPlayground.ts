@@ -30,3 +30,26 @@ function wrap<T>(value: T): { value: T } {
 }
 
 let a = wrap(1);
+
+// any vs unknown
+function exampleWithAny(value: any) {
+  // No type checking, we can perform any operation
+  console.log(value.length); // No error, even if 'value' might not have 'length'
+  return value * 10; // No error, even if 'value' might not be a number
+}
+
+function exampleWithUnknown(value: unknown) {
+  // No type checking, we can perform any operation
+  if (Array.isArray(value)) {
+    console.log(value.length); // No error, even if 'value' might not have 'length'
+  }
+
+  if (typeof value === "number") {
+    console.log(value * 10); // No error, even if 'value' might not be a number
+  }
+}
+
+exampleWithAny("hello"); // Works, but risky if we expect only numbers
+exampleWithAny(5); // Works, but no type safety
+
+// end of any vs unknown
