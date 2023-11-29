@@ -39,13 +39,11 @@ export class UserController {
   };
 
   updateUser = async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
-      const { name, status } = req.body;
-      await this.userService.update(id, { name, status });
+    const { id } = req.params;
+    const { name, status } = req.body;
+    await this.userService.update(id, { name, status });
 
-      res.status(200).send("User updated");
-    } catch (err) {}
+    res.status(200).send("User updated");
   };
 
   deleteUser = async (req: Request, res: Response) => {
@@ -54,14 +52,8 @@ export class UserController {
   };
 
   addNewHobbies = async (req: Request, res: Response) => {
-    const user = await this.userService.getById(req.params.id);
-    if (!user) {
-      res.status(400).send("User not found!");
-      return;
-    }
-
-    const nh = await this.userService.normalizeHobbiesInput(req.body.hobbies);
-    user.hobbies.push(...nh);
+    const normalizedHobbies = this.userService.normalizeHobbiesInput(req.body.hobbies);
+    await this.userService.addNewHobbies(req.params.id, normalizedHobbies);
 
     res.status(200).send("Hobbies updated!");
   };

@@ -1,5 +1,9 @@
 import { GenericPartialType } from "../types";
 
+export type Query<T> = Partial<Record<keyof T, any>>;
+
+export type Update<T> = { $set?: Partial<T>; $push?: Partial<T> };
+
 /**
  * Interface for CRUD operations on a database.
  * This interface decouples the actual database implementation from the consumers of the database.
@@ -29,6 +33,15 @@ export interface IGenericDatabase<ItemType> {
    * @returns The updated item.
    */
   update(id: string | number, item: GenericPartialType<ItemType>): Promise<ItemType>;
+
+  /**
+   * Updates an item based on the specified query and update parameters.
+   *
+   * @param query - Criteria to identify the item(s) to be updated.
+   * @param update - Update operations to apply, with $set and $push options.
+   * @returns A Promise that resolves to void after the update operation.
+   */
+  updateOne(query: Query<ItemType>, update: Update<ItemType>): Promise<void>;
 
   /**
    * Deletes an item from the database.

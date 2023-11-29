@@ -28,6 +28,17 @@ export class UserService extends GenericDataService<User> {
 
     return input;
   }
+
+  async addNewHobbies(id: string, hobbies: string[]) {
+    await this.repository.updateOne(
+      { id },
+      {
+        $push: {
+          hobbies,
+        },
+      }
+    );
+  }
 }
 
 export default UserService;
