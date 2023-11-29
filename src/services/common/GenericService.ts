@@ -6,7 +6,7 @@ import { GenericPartialType } from "../../types";
 import { DataService } from "./IDataService";
 
 export class GenericDataService<T> implements DataService<T> {
-  private repository: IGenericDatabase<T>;
+  protected repository: IGenericDatabase<T>;
 
   constructor(repository: IGenericDatabase<T>) {
     this.repository = repository;
