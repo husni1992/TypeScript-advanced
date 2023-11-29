@@ -1,4 +1,4 @@
-import { LatestGenericPartialType } from "../types";
+import { GenericPartialType } from "../types";
 
 /**
  * Interface for CRUD operations on a database.
@@ -28,7 +28,7 @@ export interface IGenericDatabase<ItemType> {
    * @param item The updated information.
    * @returns The updated item.
    */
-  update(id: string | number, item: LatestGenericPartialType<ItemType>): Promise<ItemType>;
+  update(id: string | number, item: GenericPartialType<ItemType>): Promise<ItemType>;
 
   /**
    * Deletes an item from the database.

@@ -43,7 +43,7 @@ export class UserController {
     try {
       const { id } = req.params;
       const { name, status } = req.body;
-      await this.userService.update(id, { id, name, status });
+      await this.userService.update(id, { name, status });
 
       res.status(200).send("User updated");
     } catch (err) {}
