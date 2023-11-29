@@ -89,13 +89,13 @@ export class User implements User {
   static isValidStatus(status: any): status is UserStatus {
     return ["active", "inactive", "pending"].includes(status);
   }
-}
 
-// feature #8 Tuples
-export function isValidUserEmail(email: string): [boolean, string] {
-  const isValid = email.includes("@"); // Simple email validation
-  const message = isValid ? "Valid user email" : "Invalid user email";
-  return [isValid, message];
+  // feature #8 Tuples are a typed array with a pre-defined length and types for each index
+  static isValidUserEmail(email: string): [boolean, string] {
+    const isValid = email.includes("@"); // Simple email validation
+    const message = isValid ? "Valid user email" : "Invalid user email";
+    return [isValid, message];
+  }
 }
 
 // feature #10 Literal Types

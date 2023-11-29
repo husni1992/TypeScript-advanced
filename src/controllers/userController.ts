@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { User, checkAvailableAuthLevelOfUser, isValidUserEmail } from "../models/User";
+import { User, checkAvailableAuthLevelOfUser } from "../models/User";
 import { UserService } from "../services/UserService";
 import { MockCrudDatabase } from "../services/Database";
 
 export class UserController {
-  private dbInstance = new MockCrudDatabase<User>();
-  private userService = new UserService(this.dbInstance);
+  private mockDB = new MockCrudDatabase<User>();
+  private userService = new UserService(this.mockDB);
 
   createUser = async (req: Request, res: Response) => {
-    const [isValid, message] = isValidUserEmail(req.body.contact.email);
+    const [isValid, message] = User.isValidUserEmail(req.body.contact.email);
     if (!isValid) {
       res.status(400).json({ isValid, message });
       return;
