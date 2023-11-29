@@ -1,3 +1,5 @@
+import { LatestGenericPartialType } from "../types";
+
 /**
  * Interface for CRUD operations on a database.
  * This interface decouples the actual database implementation from the consumers of the database.
@@ -5,7 +7,7 @@
  * that uses the database. This is particularly useful for testing and when different implementations
  * are needed in different environments (e.g., development, testing, production).
  */
-export interface IMockCrudDatabase<ItemType> {
+export interface IGenericDatabase<ItemType> {
   /**
    * Creates a new item in the database.
    * @param item The item to be created.
@@ -26,7 +28,7 @@ export interface IMockCrudDatabase<ItemType> {
    * @param item The updated information.
    * @returns The updated item.
    */
-  update(id: string | number, item: GenericPartialType<ItemType>): Promise<ItemType>;
+  update(id: string | number, item: LatestGenericPartialType<ItemType>): Promise<ItemType>;
 
   /**
    * Deletes an item from the database.
@@ -35,7 +37,3 @@ export interface IMockCrudDatabase<ItemType> {
    */
   delete(id: string | number): Promise<boolean>;
 }
-
-export type GenericPartialType<Type> = {
-  [Property in keyof Type]?: Type[Property];
-};
