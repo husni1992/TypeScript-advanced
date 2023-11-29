@@ -8,14 +8,13 @@ export class UserController {
   private userService = new UserService(this.mockDB);
 
   createUser = async (req: Request, res: Response) => {
-    const [isValid, message] = User.isValidUserEmail(req.body.contact.email);
-    if (!isValid) {
-      res.status(400).json({ isValid, message });
+    const [isValidEmailAddress, message] = User.isValidUserEmail(req.body.contact.email);
+    if (!isValidEmailAddress) {
+      res.status(400).json({ isValid: isValidEmailAddress, message });
       return;
     }
 
     const userStatus = req.body.status;
-
     if (!User.isValidStatus(userStatus)) {
       res.status(400).send("Invalid status!");
       return;
