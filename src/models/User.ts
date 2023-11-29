@@ -1,4 +1,14 @@
-import { UserRole } from "./Types";
+/**
+ * feature #4: Enums is a way to define a set of named constants.
+ * Unlike interfaces or types, Enums can be used as regular objects at runtime.
+ * This 'UserRole' enum defines distinct user roles, accessible for runtime operations like
+ * validation or iteration with 'Object.values()'.
+ */
+enum UserRole {
+  Admin = "ADMIN",
+  User = "USER",
+  Guest = "GUEST",
+}
 
 interface EmailContact {
   email: string;
@@ -12,11 +22,11 @@ interface PhoneContact {
 // feature #9 Intersection types
 type ContactInfo = EmailContact & PhoneContact;
 
-// feature #12: Type alias
+// feature #12 Type alias
 // Type Aliases allow defining types with a custom name (an Alias). In this example it's UserStatus
 type UserStatus = "ACTIVE" | "INACTIVE" | "PENDING";
 
-// feature #2: Interface for User
+// feature #2 Interface for User
 export interface User {
   // feature 9#: Union types
   id: number | string;
@@ -34,16 +44,18 @@ export class User implements User {
   contact: ContactInfo;
   role: UserRole;
   hobbies: string[];
+  status: UserStatus;
 
-  constructor({ id, name, role, contact, hobbies }: User) {
+  constructor({ id, name, role, contact, hobbies, status }: User) {
     this.id = id;
     this.name = name;
     this.contact = contact;
     this.role = role;
     this.hobbies = hobbies;
+    this.status = status;
   }
 
-  // feature #7.1: Implement User-defined type guard for validating user inputs
+  // feature #7 Implement User-defined type guard for validating user inputs
   static isUser(obj: any): obj is User {
     return (
       typeof obj.id === "string" &&
@@ -55,7 +67,7 @@ export class User implements User {
   }
 
   /**
-   * // feature #7.2: User-defined type guard for UserStatus.
+   * // feature #7 User-defined type guard for UserStatus.
    * This method checks if the given status is a valid UserStatus.
    * If it returns true, TypeScript infers that the status is of type UserStatus within the scope it's used.
    * This helps in type narrowing, allowing for more type-safe code.
@@ -79,20 +91,20 @@ export class User implements User {
   }
 }
 
-// feature #8. Tuples
+// feature #8 Tuples
 export function isValidUserEmail(email: string): [boolean, string] {
   const isValid = email.includes("@"); // Simple email validation
   const message = isValid ? "Valid user email" : "Invalid user email";
   return [isValid, message];
 }
 
-// feature #10: Literal Types
+// feature #10 Literal Types
 // It enables string values as valid return types.
 export function checkAvailableAuthLevelOfUser(id: string): "READ" | "WRITE" | "DELETE" | "ADMIN" {
   return "READ";
 }
 
-// feature #6.1: Generic functions
+// feature #6 Generic Functions
 export function getItems<T>(items: T[]): T[] {
   return items;
 }
