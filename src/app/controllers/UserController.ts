@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { User, checkAvailableAuthLevelOfUser } from "../models/User";
 import { UserService } from "../services/UserService";
-import { MockCrudDatabase } from "../services/Database";
+import { MockCrudDatabase } from "../../data/Database";
 
 export class UserController {
   private mockDB = new MockCrudDatabase<User>();

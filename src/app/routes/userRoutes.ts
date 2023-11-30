@@ -21,4 +21,4 @@ router.get("/users/:id/check-auth-level", userController.checkAvailableAuthLevel
 router.route("/users").post(userController.createUser);
 router.post("/users/:id/hobbies", userController.addNewHobbies);
 
-export default router;
+export { router as userRoutes };

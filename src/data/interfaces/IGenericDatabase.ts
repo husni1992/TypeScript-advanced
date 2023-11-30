@@ -1,4 +1,4 @@
-import { GenericPartialType } from "../types";
+import { GenericPartialType } from "../../types";
 
 export type Query<T> = Partial<Record<keyof T, any>>;
 

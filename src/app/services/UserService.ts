@@ -1,8 +1,8 @@
 // feature #3 Classes, UserService.ts
 
 import { User } from "../models/User";
-import { MockCrudDatabase } from "./Database";
-import { GenericDataService } from "./common/GenericService";
+import { MockCrudDatabase } from "../../data/Database";
+import { GenericDataService } from "./GenericService";
 
 /**
  * Service class for user-related operations, extending GenericService
@@ -40,5 +40,3 @@ export class UserService extends GenericDataService<User> {
     );
   }
 }
-
-export default UserService;

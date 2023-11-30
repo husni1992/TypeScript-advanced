@@ -1,4 +1,4 @@
-import { IGenericDatabase, Query, Update } from "../interfaces/IGenericDatabase";
+import { IGenericDatabase, Query, Update } from "./interfaces/IGenericDatabase";
 import { GenericPartialType } from "../types";
 
 export class MockCrudDatabase<ItemType> implements IGenericDatabase<ItemType> {
