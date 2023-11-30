@@ -1,14 +1,14 @@
 // feature #3 Classes, UserService.ts
 
-import { User } from "../models/User";
 import { MockCrudDatabase } from "../../data/Database";
 import { GenericDataService } from "./GenericService";
+import { IUser, UserInfoBasedOnRole, UserRole } from "../../types/userTypes";
 
 /**
  * Service class for user-related operations, extending GenericService
  */
-export class UserService extends GenericDataService<User> {
-  constructor(repository: MockCrudDatabase<User>) {
+export class UserService extends GenericDataService<IUser> {
+  constructor(repository: MockCrudDatabase<IUser>) {
     super(repository);
   }
 
@@ -38,5 +38,43 @@ export class UserService extends GenericDataService<User> {
         },
       }
     );
+  }
+
+  private getUserSensitiveInfo(id: string) {
+    return {
+      phoneNumber: "068887777",
+      email: "foo@bar.com",
+    };
+  }
+
+  private getUserNonSensitivePublicInfo(id: string) {
+    return {
+      status: "INACTIVE",
+      hobbies: [""],
+    };
+  }
+
+  private getUserPublicInfo(id: string) {
+    return {
+      name: "Husny Ahamed M.G",
+    };
+  }
+
+  getUserInformation<T extends IUser["role"]>(
+    currentUserRole: T,
+    idOfExpectedUser: string
+  ): UserInfoBasedOnRole<T> {
+    if (currentUserRole === UserRole.Admin) {
+      // Return admin level accessible information
+      return this.getUserSensitiveInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
+    }
+
+    if (currentUserRole === UserRole.User) {
+      // Return user level accessible information
+      return this.getUserNonSensitivePublicInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
+    }
+
+    // Return public information
+    return this.getUserPublicInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
   }
 }

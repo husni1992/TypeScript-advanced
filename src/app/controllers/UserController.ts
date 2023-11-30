@@ -58,6 +58,13 @@ export class UserController {
     res.status(200).send("Hobbies updated!");
   };
 
+  getUserData = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = this.userService.getUserInformation(req.currentUser.role, id);
+
+    res.send(result);
+  };
+
   checkAvailableAuthLevelOfUser = (req: Request, res: Response) => {
     const result = checkAvailableAuthLevelOfUser(req.params.id);
     res.status(200).send(result);

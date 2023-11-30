@@ -51,6 +51,7 @@ type OtherInfo = {
   name: IUser["name"];
 };
 
+// feature #14 Conditional types: Creating types that depend on other types or conditions
 export type UserInfoBasedOnRole<T extends UserRole> = T extends UserRole.Admin
   ? PrivateInfo
   : T extends UserRole.User

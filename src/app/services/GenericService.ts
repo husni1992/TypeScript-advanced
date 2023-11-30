@@ -1,10 +1,9 @@
-// feature #6 Generic service class implementation
-
 import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
 import { GenericPartialType } from "../../types";
 
 import { DataService } from "../../data/interfaces/IDataService";
 
+// feature #6 Generic service class implementation
 export class GenericDataService<T> implements DataService<T> {
   protected repository: IGenericDatabase<T>;
 
