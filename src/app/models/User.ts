@@ -1,52 +1,15 @@
-/**
- * feature #4: Enums is a way to define a set of named constants.
- * Unlike interfaces or types, Enums can be used as regular objects at runtime.
- * This 'UserRole' enum defines distinct user roles, accessible for runtime operations like
- * validation or iteration with 'Object.values()'.
- */
-enum UserRole {
-  Admin = "ADMIN",
-  User = "USER",
-  Guest = "GUEST",
-}
-
-interface EmailContact {
-  email: string;
-}
-
-interface PhoneContact {
-  // feature #11 Optional property, Typescript's nullable types
-  phoneNumber?: string;
-}
-
-// feature #9 Intersection types
-type ContactInfo = EmailContact & PhoneContact;
-
-// feature #12 Type alias
-// Type Aliases allow defining types with a custom name (an Alias). In this example it's UserStatus
-type UserStatus = "ACTIVE" | "INACTIVE" | "PENDING";
-
-// feature #2 Interface for User
-export interface User {
-  // feature 9#: Union types
-  id: number | string;
-  name: string;
-  role: UserRole;
-  contact: ContactInfo;
-  hobbies: string[];
-  status: UserStatus;
-}
+import { ContactInfo, IUser, UserRole, UserStatus } from "../../types/userTypes";
 
 // 2. Class implementing the User interface (demonstrates TypeScript's class and type annotation features)
-export class User implements User {
-  id: number | string;
+export class User implements IUser {
+  id: string;
   name: string;
   contact: ContactInfo;
   role: UserRole;
   hobbies: string[];
   status: UserStatus;
 
-  constructor({ id, name, role, contact, hobbies, status }: User) {
+  constructor({ id, name, role, contact, hobbies, status }: IUser) {
     this.id = id;
     this.name = name;
     this.contact = contact;
