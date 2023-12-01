@@ -60,7 +60,7 @@ export class UserService extends GenericDataService<IUser> {
     };
   }
 
-  getUserInformation<T extends IUser["role"]>(
+  getUserInformation<T extends UserRole>(
     currentUserRole: T,
     idOfExpectedUser: string
   ): UserInfoBasedOnRole<T> {

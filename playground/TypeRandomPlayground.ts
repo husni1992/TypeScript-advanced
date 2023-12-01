@@ -1,6 +1,6 @@
 // This file is intended to be used as a temporary playground just to tryout some TS code and not used in anywhere in the app.
 
-import { UserInfoBasedOnRole, UserRole, UserStatus } from "./userTypes";
+import { UserInfoBasedOnRole, UserRole, UserStatus } from "../src/types/userTypes";
 
 type Car = {
   make?: string;
@@ -92,3 +92,8 @@ let adminInfo = zee({ role: UserRole.Admin }); // Should be inferred as UserInfo
 let userInfo = zee({ role: UserRole.User }); // Should be inferred as UserInfoBasedOnRole<UserRole.User>
 
 let guestInfo = zee({ role: UserRole.Guest }); // Should be inferred as UserInfoBasedOnRole<UserRole.Guest>
+
+
+
+// 01/12/2023
+
