@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "TS_NODE_FILES=true nodemon --watch 'src/**/*.ts' --exec 'ts-node -P ./tsconfig.json' --log-error src/index.ts"
+    "dev": "TS_NODE_FILES=true nodemon --watch 'src/**/*.ts' --exec 'clear && ts-node -P ./tsconfig.json' --log-error src/index.ts"
   },
   "keywords": [],
   "author": "",

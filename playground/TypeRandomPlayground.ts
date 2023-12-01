@@ -93,7 +93,4 @@ let userInfo = zee({ role: UserRole.User }); // Should be inferred as UserInfoBa
 
 let guestInfo = zee({ role: UserRole.Guest }); // Should be inferred as UserInfoBasedOnRole<UserRole.Guest>
 
-
-
 // 01/12/2023
-

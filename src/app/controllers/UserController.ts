@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { User, checkAvailableAuthLevelOfUser } from "../models/User";
 import { UserService } from "../services/UserService";
 import { MockCrudDatabase } from "../../data/Database";
+import { RequireRole } from "../../decorators/RequireRoleAuth";
+import { UserRole } from "../../types/userTypes";
 
 export class UserController {
   private mockDB = new MockCrudDatabase<User>();
@@ -46,10 +48,11 @@ export class UserController {
     res.status(200).send("User updated");
   };
 
-  deleteUser = async (req: Request, res: Response) => {
+  @RequireRole(UserRole.Admin)
+  async deleteUser(req: Request, res: Response): Promise<void> {
     // Logic for deleting a user
     res.status(200).send("User deleted");
-  };
+  }
 
   addNewHobbies = async (req: Request, res: Response) => {
     const normalizedHobbies = this.userService.normalizeHobbiesInput(req.body.hobbies);
