@@ -93,4 +93,41 @@ let userInfo = zee({ role: UserRole.User }); // Should be inferred as UserInfoBa
 
 let guestInfo = zee({ role: UserRole.Guest }); // Should be inferred as UserInfoBasedOnRole<UserRole.Guest>
 
-// 01/12/2023
+// 04/12/2023
+
+// TS utility type readonly
+type User = {
+  readonly _id: string;
+  name: string;
+};
+
+let foo: User = {
+  _id: "asas",
+  name: "husnyh",
+};
+
+foo.name = "asa";
+foo._id = "1212"; // cannot edit this
+
+//
+
+function alwaysThrows(errorMessage: string): never {
+  throw new Error(errorMessage);
+}
+
+function throwError(errorMessage: string): never {
+  alwaysThrows("foo");
+}
+
+function foo2(errorMessage: string): never {
+  let a = 0;
+  while (true) {
+    console.log(errorMessage);
+  }
+}
+
+function foo3(errorMessage: string): never {
+  console.log("This should not be logged");
+  // Forcefully telling TypeScript this line is never reached
+  return undefined as never;
+}
