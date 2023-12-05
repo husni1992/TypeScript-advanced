@@ -39,8 +39,8 @@ enum UserRoles {
 export type ConType<T extends UserRoles> = T extends UserRoles.Admin
   ? LibraryItem
   : T extends UserRoles.Member
-  ? Omit<LibraryItem, "restrictedNotes" | "issueNumber">
-  : never;
+    ? Omit<LibraryItem, "restrictedNotes" | "issueNumber">
+    : never;
 
 function fetchLibraryItemDetails<T extends UserRoles>(userRole: T): ConType<T> {
   if (userRole === UserRoles.Admin) {

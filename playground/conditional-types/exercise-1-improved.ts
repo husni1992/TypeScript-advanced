@@ -38,26 +38,26 @@ type LibraryItems = Book | Magazine | DVD;
 type MemberOnlyData<L extends LibraryItems> = L extends Book
   ? Pick<Book, "title" | "author" | "isbn">
   : L extends Magazine
-  ? Pick<Magazine, "title" | "issueNumber">
-  : L extends DVD
-  ? Pick<DVD, "title" | "director" | "rating">
-  : never;
+    ? Pick<Magazine, "title" | "issueNumber">
+    : L extends DVD
+      ? Pick<DVD, "title" | "director" | "rating">
+      : never;
 
 // Conditional type that picks certain public-facing properties from library items based on the user role 'Guest'.
 type PublicData<L extends LibraryItems> = L extends Book
   ? Pick<Book, "title" | "author">
   : L extends Magazine
-  ? Pick<Magazine, "title">
-  : L extends DVD
-  ? Pick<DVD, "title" | "rating">
-  : never;
+    ? Pick<Magazine, "title">
+    : L extends DVD
+      ? Pick<DVD, "title" | "rating">
+      : never;
 
 // General conditional type for returning data based on user role and library item type.
 type ItemDetailsByUserRole<L extends LibraryItems, R extends UserRole> = R extends UserRole.Admin
   ? L
   : R extends UserRole.Member
-  ? MemberOnlyData<L>
-  : PublicData<L>;
+    ? MemberOnlyData<L>
+    : PublicData<L>;
 
 // Type guard functions to check the specific type of a library item.
 function isBook(item: LibraryItems): item is Book {
@@ -126,7 +126,7 @@ function extractDataByRole<L extends LibraryItems, R extends UserRole>(item: L, 
 // Using the function to get item details based on role and item type.
 function getItemDetailsFilteredByRole<L extends LibraryItems, R extends UserRole>(
   item: L,
-  userRole: R
+  userRole: R,
 ): ItemDetailsByUserRole<L, R> {
   return extractDataByRole(item, userRole) as ItemDetailsByUserRole<L, R>;
 }

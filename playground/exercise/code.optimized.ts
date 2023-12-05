@@ -29,26 +29,26 @@ type MechanicData<V extends Vehicle> = V;
 type DriverData<V extends Vehicle> = V extends Car
   ? Pick<Car, "noOfDoors" | "make">
   : V extends Truck
-  ? Pick<Truck, "make" | "payloadCapacity">
-  : V extends Motorbike
-  ? Pick<Motorbike, "make" | "type">
-  : never;
+    ? Pick<Truck, "make" | "payloadCapacity">
+    : V extends Motorbike
+      ? Pick<Motorbike, "make" | "type">
+      : never;
 
 type InspectorData<V extends Vehicle> = V extends Car
   ? Pick<Car, "make">
   : V extends Truck
-  ? Pick<Truck, "make">
-  : V extends Motorbike
-  ? Pick<Motorbike, "make">
-  : never;
+    ? Pick<Truck, "make">
+    : V extends Motorbike
+      ? Pick<Motorbike, "make">
+      : never;
 
 type DataByVehicleAndUser<V extends Vehicle, U extends UserType> = U extends UserType.Mechanic
   ? V
   : U extends UserType.Driver
-  ? DriverData<V>
-  : U extends UserType.Inspector
-  ? InspectorData<V>
-  : never;
+    ? DriverData<V>
+    : U extends UserType.Inspector
+      ? InspectorData<V>
+      : never;
 
 function isCar(vehicle: Vehicle): vehicle is Car {
   return (vehicle as Car).noOfDoors !== undefined;

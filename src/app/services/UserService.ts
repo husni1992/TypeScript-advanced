@@ -36,7 +36,7 @@ export class UserService extends GenericDataService<IUser> {
         $push: {
           hobbies,
         },
-      }
+      },
     );
   }
 
@@ -60,10 +60,7 @@ export class UserService extends GenericDataService<IUser> {
     };
   }
 
-  getUserInformation<T extends UserRole>(
-    currentUserRole: T,
-    idOfExpectedUser: string
-  ): UserInfoBasedOnRole<T> {
+  getUserInformation<T extends UserRole>(currentUserRole: T, idOfExpectedUser: string): UserInfoBasedOnRole<T> {
     if (currentUserRole === UserRole.Admin) {
       // Return admin level accessible information
       return this.getUserSensitiveInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;

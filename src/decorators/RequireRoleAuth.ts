@@ -7,7 +7,6 @@ export function RequireRole(requiredRole: UserRole) {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (req: Request, res: Response) {
-
       // verify if the req and res are the expected Express's props
       console.log("body" in req, "send" in res);
       if (!req || !req.currentUser) {

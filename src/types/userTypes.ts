@@ -55,5 +55,5 @@ type OtherInfo = {
 export type UserInfoBasedOnRole<T extends UserRole> = T extends UserRole.Admin
   ? PrivateInfo
   : T extends UserRole.User
-  ? PublicInfo
-  : OtherInfo;
+    ? PublicInfo
+    : OtherInfo;

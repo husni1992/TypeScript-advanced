@@ -13,4 +13,3 @@ export function LogMethod(target: any, propertyName: string, descriptor: Propert
 
   return descriptor;
 }
-

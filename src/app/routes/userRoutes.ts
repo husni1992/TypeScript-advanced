@@ -20,11 +20,7 @@ const limiter = rateLimit({
 router.use("/users/:id/check-auth-level", limiter);
 
 // Grouped route for /users/:id with chainable route handlers
-router
-  .route("/users/:id")
-  .get(userController.getUser)
-  .put(userController.updateUser)
-  .delete(userController.deleteUser);
+router.route("/users/:id").get(userController.getUser).put(userController.updateUser).delete(userController.deleteUser);
 
 // Specific sub-route for checking the auth level
 router.get("/users/:id/check-auth-level", userController.checkAvailableAuthLevelOfUser);
