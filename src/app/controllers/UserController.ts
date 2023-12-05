@@ -4,6 +4,7 @@ import { UserService } from "../services/UserService";
 import { MockCrudDatabase } from "../../data/Database";
 import { RequireRole } from "../../decorators/RequireRoleAuth";
 import { UserRole } from "../../types/userTypes";
+import { Feature, featureFlagInstance } from "../../config/featureFlags";
 
 export class UserController {
   private mockDB = new MockCrudDatabase<User>();
@@ -55,6 +56,11 @@ export class UserController {
   }
 
   addNewHobbies = async (req: Request, res: Response) => {
+    if (!featureFlagInstance.getFlag("ENABLE_MODIFYING_HOBBIES").enabled) {
+      res.status(400).send("Feature B is not enabled!");
+      return;
+    }
+
     const normalizedHobbies = this.userService.normalizeHobbiesInput(req.body.hobbies);
     await this.userService.addNewHobbies(req.params.id, normalizedHobbies);
 

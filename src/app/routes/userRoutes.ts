@@ -2,6 +2,7 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import { UserController } from "../controllers/UserController";
 import { authUser } from "../middlewares/userAuth";
+import { Feature, featureFlagInstance } from "../../config/featureFlags";
 
 const router = express.Router();
 const userController = new UserController();
@@ -11,16 +12,23 @@ const userController = new UserController();
 
 router.use(authUser);
 
+const rateLimitEnabled = featureFlagInstance.getFlag("ENABLE_RATE_LIMIT").enabled;
+console.log("Rate limit enabled: ", rateLimitEnabled);
+
 // Enable rate limiting
 const limiter = rateLimit({
   windowMs: 2000, // 15 minutes
   max: 1, // limit each IP to 100 requests per windowMs
 });
 
-router.use("/users/:id/check-auth-level", limiter);
+router.use("/users/:id/check-auth-level", rateLimitEnabled ? limiter : (req, res, next) => next());
 
 // Grouped route for /users/:id with chainable route handlers
-router.route("/users/:id").get(userController.getUser).put(userController.updateUser).delete(userController.deleteUser);
+router
+  .route("/users/:id")
+  .get(userController.getUser)
+  .put(userController.updateUser)
+  .delete(userController.deleteUser);
 
 // Specific sub-route for checking the auth level
 router.get("/users/:id/check-auth-level", userController.checkAvailableAuthLevelOfUser);
