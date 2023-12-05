@@ -16,8 +16,8 @@ export type UserStatus = "ACTIVE" | "INACTIVE" | "PENDING";
 
 // feature #2 Interface for User
 export interface IUser {
-  // feature 9#: Union types
-  id: string;
+  // feature #17 Utility Type "readonly": makes the properties of the constructed type cannot be reassigned
+  readonly id: string;
   name: string;
   role: UserRole;
   contact: ContactInfo;

@@ -1,3 +1,5 @@
+import { IUser } from "./userTypes";
+
 /**
  * GenericPartialType: A TypeScript utility type for creating a new type based on an existing type (`Type`),
  * where all properties are optional except for those specified as mandatory (`MandatoryProperties`).
@@ -16,4 +18,9 @@ export type GenericPartialType<Type, MandatoryProperties extends keyof Type = ne
   [Property in Exclude<keyof Type, MandatoryProperties>]?: Type[Property];
 } & {
   [Property in MandatoryProperties]: Type[Property];
+};
+
+// example usage: In below implementation, all the fields are made optional except "id"
+let updateUser: GenericPartialType<IUser, "id"> = {
+  id: "someid",
 };

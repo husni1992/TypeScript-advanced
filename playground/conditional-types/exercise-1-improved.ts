@@ -1,6 +1,6 @@
 //feature #14 Conditional types: Demonstration of complex use of conditional types and Generics in TypeScript
-//feature #6 Conditional types: Demonstration of complex use of Generics in TypeScript
-//feature #21 Conditional types: Demonstration of complex use of Generics in TypeScript
+//feature #6 Generics: Demonstration of complex use of Generics in TypeScript
+//feature #21 Advanced Generics: Demonstration of complex use of Generics in TypeScript
 
 import { bookMock, dvdMock, magazineMock } from "./mocks";
 
@@ -34,6 +34,7 @@ enum UserRole {
 type LibraryItems = Book | Magazine | DVD;
 
 // Conditional type that picks certain properties from library items based on the user role 'Member'
+// feature #17 Utility Type "Pick": Constructs a type by picking the set of properties Keys from Type
 type MemberOnlyData<L extends LibraryItems> = L extends Book
   ? Pick<Book, "title" | "author" | "isbn">
   : L extends Magazine
@@ -156,4 +157,3 @@ The above console.log outputs the following:
   guestBook: { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' }
 }
 */
-s;

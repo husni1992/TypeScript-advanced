@@ -131,3 +131,62 @@ function foo3(errorMessage: string): never {
   // Forcefully telling TypeScript this line is never reached
   return undefined as never;
 }
+
+// Record utility type
+
+// example 1 using Record
+interface CatInfo {
+  age: number;
+  breed: string;
+}
+
+type CatName = "miffy" | "boris" | "mordred";
+
+const cats: Record<CatName, CatInfo> = {
+  miffy: { age: 10, breed: "Persian" },
+  boris: { age: 5, breed: "Maine Coon" },
+  mordred: { age: 16, breed: "British Shorthair" },
+  // mufa: { age: 2, breed: "Persian" },
+};
+
+cats.boris;
+
+// same example without using Record
+
+type CatName2 = "miffy" | "boris" | "mordred";
+
+type CatInfo2 = { age: number; breed: string };
+
+type CATMAP<T extends CatName2> = {
+  [property in T]: CatInfo2;
+};
+
+const cats2: CATMAP<CatName2> = {
+  miffy: { age: 10, breed: "Persian" },
+  boris: { age: 5, breed: "Maine Coon" },
+  mordred: { age: 16, breed: "British Shorthair" },
+  // mufa: { age: 2, breed: "Persian" },
+};
+
+cats2.miffy;
+
+let asasa: Record<"mambuSecrets", any> = {
+  mambuSecrets: { as: 1212 },
+};
+
+// exercise 1,
+
+type Discriminator = 1 | 2 | 3 | 4;
+
+function factory(d: Discriminator) {
+  const map: Record<Discriminator, () => string> = {
+    1: () => "1",
+    2: () => "2",
+    3: () => "3",
+    4: () => "4",
+  };
+
+  return map;
+}
+
+let t = factory(1);
