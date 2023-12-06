@@ -31,11 +31,11 @@ enum UserRole {
 }
 
 // Union type for any kind of library item.
-type LibraryItems = Book | Magazine | DVD;
+type LibraryItem = Book | Magazine | DVD;
 
 // Conditional type that picks certain properties from library items based on the user role 'Member'
 // feature #17 Utility Type "Pick": Constructs a type by picking the set of properties Keys from Type
-type MemberOnlyData<L extends LibraryItems> = L extends Book
+type MemberOnlyData<L extends LibraryItem> = L extends Book
   ? Pick<Book, "title" | "author" | "isbn">
   : L extends Magazine
     ? Pick<Magazine, "title" | "issueNumber">
@@ -44,7 +44,7 @@ type MemberOnlyData<L extends LibraryItems> = L extends Book
       : never;
 
 // Conditional type that picks certain public-facing properties from library items based on the user role 'Guest'.
-type PublicData<L extends LibraryItems> = L extends Book
+type PublicData<L extends LibraryItem> = L extends Book
   ? Pick<Book, "title" | "author">
   : L extends Magazine
     ? Pick<Magazine, "title">
@@ -53,27 +53,40 @@ type PublicData<L extends LibraryItems> = L extends Book
       : never;
 
 // General conditional type for returning data based on user role and library item type.
-type ItemDetailsByUserRole<L extends LibraryItems, R extends UserRole> = R extends UserRole.Admin
+type ItemDetailsByUserRole<L extends LibraryItem, R extends UserRole> = R extends UserRole.Admin
   ? L
   : R extends UserRole.Member
     ? MemberOnlyData<L>
     : PublicData<L>;
 
 // Type guard functions to check the specific type of a library item.
-function isBook(item: LibraryItems): item is Book {
+function isBook(item: LibraryItem): item is Book {
   return (item as Book).isbn !== undefined;
 }
 
-function isMagazine(item: LibraryItems): item is Magazine {
+function isMagazine(item: LibraryItem): item is Magazine {
   return (item as Magazine).issueNumber !== undefined;
 }
 
-function isDvd(item: LibraryItems): item is DVD {
+function isDvd(item: LibraryItem): item is DVD {
   return (item as DVD).director !== undefined;
 }
 
+function pickData<T extends LibraryItem, K extends keyof T>(
+  item: T,
+  propertiesToPick: K[],
+): Pick<T, K> {
+  const pickedData: Partial<Pick<T, K>> = {};
+  for (const property of propertiesToPick) {
+    if (property in item) {
+      pickedData[property] = item[property];
+    }
+  }
+  return pickedData as Pick<T, K>;
+}
+
 // Function to extract data based on the user role and the type of library item.
-function extractDataByRole<L extends LibraryItems, R extends UserRole>(item: L, userRole: R) {
+function extractDataByRole<L extends LibraryItem, R extends UserRole>(item: L, userRole: R) {
   switch (userRole) {
     case UserRole.Admin: {
       return item;
@@ -81,41 +94,29 @@ function extractDataByRole<L extends LibraryItems, R extends UserRole>(item: L, 
 
     case UserRole.Member: {
       if (isBook(item)) {
-        return { title: item.title, author: item.author, isbn: item.isbn };
+        return pickData(item, ["title", "author", "isbn"]);
       }
 
       if (isMagazine(item)) {
-        return {
-          title: item.title,
-          issueNumber: item.issueNumber,
-        };
+        return pickData(item, ["title", "issueNumber"]);
       }
 
       if (isDvd(item)) {
-        return {
-          title: item.title,
-          director: item.director,
-          rating: item.rating,
-        };
+        return pickData(item, ["title", "director", "rating"]);
       }
     }
 
     case UserRole.Guest: {
       if (isBook(item)) {
-        return { title: item.title, author: item.author };
+        return pickData(item, ["title", "author"]);
       }
 
       if (isMagazine(item)) {
-        return {
-          title: item.title,
-        };
+        return pickData(item, ["title"]);
       }
 
       if (isDvd(item)) {
-        return {
-          title: item.title,
-          rating: item.rating,
-        };
+        return pickData(item, ["title", "rating"]);
       }
     }
   }
@@ -124,7 +125,7 @@ function extractDataByRole<L extends LibraryItems, R extends UserRole>(item: L, 
 }
 
 // Using the function to get item details based on role and item type.
-function getItemDetailsFilteredByRole<L extends LibraryItems, R extends UserRole>(
+function getItemDetailsFilteredByRole<L extends LibraryItem, R extends UserRole>(
   item: L,
   userRole: R,
 ): ItemDetailsByUserRole<L, R> {
