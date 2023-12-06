@@ -2,21 +2,14 @@ import { ContactInfo, IUser, UserRole, UserStatus } from "../../types/userTypes"
 
 // 2. Class implementing the User interface (demonstrates TypeScript's class and type annotation features)
 export class User implements IUser {
-  id: string;
-  name: string;
-  contact: ContactInfo;
-  role: UserRole;
-  hobbies: string[];
-  status: UserStatus;
-
-  constructor({ id, name, role, contact, hobbies, status }: IUser) {
-    this.id = id;
-    this.name = name;
-    this.contact = contact;
-    this.role = role;
-    this.hobbies = hobbies;
-    this.status = status;
-  }
+  constructor(
+    public id: IUser["id"],
+    public name: IUser["name"],
+    public contact: IUser["contact"],
+    public role: IUser["role"],
+    public hobbies: IUser["hobbies"],
+    public status: IUser["status"],
+  ) {}
 
   // feature #7 Implement User-defined type guard for validating user inputs
   static isUser(obj: any): obj is User {

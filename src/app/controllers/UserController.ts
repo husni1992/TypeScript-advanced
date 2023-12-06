@@ -24,7 +24,8 @@ export class UserController {
     }
 
     // Create a new User instance
-    const newUser = new User(req.body);
+    const { id, name, contact, role, hobbies, status } = req.body;
+    const newUser = new User(id, name, contact, role, hobbies, status);
 
     if (!User.isUser(newUser)) {
       res.status(400).send("Invalid user data!");
