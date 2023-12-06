@@ -190,3 +190,40 @@ function factory(d: Discriminator) {
 }
 
 let t = factory(1);
+
+// Utility Type: Parameters<Type>
+function greet(name: string, age: number, foo: CatName2) {
+  console.log(`Hello, ${name}, you are ${age} years old!`);
+}
+
+type GreetParams = Parameters<typeof greet>;
+
+const greetParams: GreetParams = ["John", 30, "miffy"];
+
+// Utility Type: NonNullable<Type>
+type NullableString = string | null;
+type NonNullableString = NonNullable<NullableString>;
+
+const nonNullableString: NonNullableString = "Hello";
+
+// Utility Type: ReturnType<Type>
+type GreetReturn = ReturnType<typeof greet>;
+
+const greetReturn: GreetReturn = undefined; // ReturnType is void
+
+// Generic class using Record utility
+
+type FOOO<Type> = {
+  [Property in keyof Type]: Type[Property];
+};
+
+class Result<Properties> {
+  constructor(public readonly properties: { [K in keyof Properties]: Properties[K] }) {}
+}
+
+type Person = {
+  name: string;
+  age: number;
+};
+
+const p1 = new Result<Person>({ age: 31, name: "husnyh" });
