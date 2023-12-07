@@ -2,13 +2,13 @@
 
 import { MockCrudDatabase } from "../../data/Database";
 import { GenericDataService } from "./GenericDataService";
-import { IUser, UserInfoBasedOnRole, UserRole } from "../../types/userTypes";
+import { UserTypes } from "../../types/userTypes";
 
 /**
  * Service class for user-related operations, extending GenericService
  */
-export class UserService extends GenericDataService<IUser> {
-  constructor(repository: MockCrudDatabase<IUser>) {
+export class UserService extends GenericDataService<UserTypes.IUser> {
+  constructor(repository: MockCrudDatabase<UserTypes.IUser>) {
     super(repository);
   }
 
@@ -60,22 +60,24 @@ export class UserService extends GenericDataService<IUser> {
     };
   }
 
-  getUserInformation<T extends UserRole>(
+  getUserInformation<T extends UserTypes.Role>(
     currentUserRole: T,
     idOfExpectedUser: string,
-  ): UserInfoBasedOnRole<T> {
-    if (currentUserRole === UserRole.Admin) {
+  ): UserTypes.UserInfoBasedOnRole<T> {
+    if (currentUserRole === UserTypes.Role.Admin) {
       // Return admin level accessible information
-      return this.getUserSensitiveInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
+      return this.getUserSensitiveInfo(idOfExpectedUser) as UserTypes.UserInfoBasedOnRole<T>;
     }
 
-    if (currentUserRole === UserRole.User) {
+    if (currentUserRole === UserTypes.Role.User) {
       // Return user level accessible information
-      return this.getUserNonSensitivePublicInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
+      return this.getUserNonSensitivePublicInfo(
+        idOfExpectedUser,
+      ) as UserTypes.UserInfoBasedOnRole<T>;
     }
 
     // Return public information
-    return this.getUserPublicInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
+    return this.getUserPublicInfo(idOfExpectedUser) as UserTypes.UserInfoBasedOnRole<T>;
   }
 
   async findActiveUsers() {

@@ -1,6 +1,6 @@
 // This file is intended to be used as a temporary playground just to tryout some TS code and not used in anywhere in the app.
 
-import { UserInfoBasedOnRole, UserRole, IUser } from "../src/types/userTypes";
+import { UserTypes } from "../src/types/userTypes";
 
 type Car = {
   make?: string;
@@ -58,40 +58,40 @@ exampleWithAny(5); // Works, but no type safety
 
 /*
 // feature #6 Generic Type Constraint
-  In below example. the T extends IUser["role"] means that the generic type T can be any type 
-  that is compatible with the type of the role property in the IUser interface. 
-  It's like saying, "T can be any type, as long as it's the same type as IUser["role"] or a subtype of it."
+  In below example. the T extends UserTypes.IUser["role"] means that the generic type T can be any type 
+  that is compatible with the type of the role property in the UserTypes.IUser interface. 
+  It's like saying, "T can be any type, as long as it's the same type as UserTypes.IUser["role"] or a subtype of it."
 */
-function zee<T extends UserRole>(obj: { role: T }): UserInfoBasedOnRole<T> {
-  if (obj.role === UserRole.Admin) {
+function zee<T extends UserTypes.Role>(obj: { role: T }): UserTypes.UserInfoBasedOnRole<T> {
+  if (obj.role === UserTypes.Role.Admin) {
     return {
       phoneNumber: "",
       email: "",
-    } as UserInfoBasedOnRole<T>;
+    } as UserTypes.UserInfoBasedOnRole<T>;
   }
 
-  if (obj.role === UserRole.User) {
+  if (obj.role === UserTypes.Role.User) {
     return {
       email: "",
-    } as UserInfoBasedOnRole<T>;
+    } as UserTypes.UserInfoBasedOnRole<T>;
   }
 
-  if (obj.role === UserRole.Guest) {
+  if (obj.role === UserTypes.Role.Guest) {
     return {
-      status: "foo" as IUser["status"],
+      status: "foo" as UserTypes.IUser["status"],
       hobbies: ["foo"],
-    } as UserInfoBasedOnRole<T>;
+    } as UserTypes.UserInfoBasedOnRole<T>;
   }
 
   throw new Error("Invalid role");
 }
 
 // Typescript infers adminInfo type as PrivateInfo
-let adminInfo = zee({ role: UserRole.Admin }); // Should be inferred as UserInfoBasedOnRole<UserRole.Admin>
+let adminInfo = zee({ role: UserTypes.Role.Admin }); // Should be inferred as UserTypes.UserInfoBasedOnRole<UserTypes.UserRole.Admin>
 
-let userInfo = zee({ role: UserRole.User }); // Should be inferred as UserInfoBasedOnRole<UserRole.User>
+let userInfo = zee({ role: UserTypes.Role.User }); // Should be inferred as UserTypes.UserInfoBasedOnRole<UserTypes.UserRole.User>
 
-let guestInfo = zee({ role: UserRole.Guest }); // Should be inferred as UserInfoBasedOnRole<UserRole.Guest>
+let guestInfo = zee({ role: UserTypes.Role.Guest }); // Should be inferred as UserTypes.UserInfoBasedOnRole<UserTypes.UserRole.Guest>
 
 // 04/12/2023
 

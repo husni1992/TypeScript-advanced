@@ -3,7 +3,7 @@ import { User, checkAvailableAuthLevelOfUser } from "../models/User";
 import { UserService } from "../services/UserService";
 import { MockCrudDatabase } from "../../data/Database";
 import { RequireRole } from "../../decorators/RequireRoleAuth";
-import { UserRole } from "../../types/userTypes";
+import { UserTypes } from "../../types/userTypes";
 import { featureFlagInstance } from "../../config/featureFlags";
 
 export class UserController {
@@ -50,7 +50,7 @@ export class UserController {
     res.status(200).send("User updated");
   };
 
-  @RequireRole(UserRole.Admin)
+  @RequireRole(UserTypes.Role.Admin)
   async deleteUser(req: Request, res: Response): Promise<void> {
     // Logic for deleting a user
     res.status(200).send("User deleted");

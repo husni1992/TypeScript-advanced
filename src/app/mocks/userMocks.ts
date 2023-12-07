@@ -1,6 +1,6 @@
-import { IUser, UserRole } from "../../types/userTypes";
+import { UserTypes } from "../../types/userTypes";
 
-export const mockUser: IUser = {
+export const mockUser: UserTypes.IUser = {
   id: "99",
   contact: {
     email: "someone@domain.com",
@@ -8,6 +8,6 @@ export const mockUser: IUser = {
   },
   hobbies: ["Cycling", "Reading"],
   name: "Husny Ahamed",
-  role: UserRole.Admin,
+  role: UserTypes.Role.Admin,
   status: "ACTIVE",
 };

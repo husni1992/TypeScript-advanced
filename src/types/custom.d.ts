@@ -1,9 +1,9 @@
-import { IUser } from "./userTypes";
+import { UserTypes } from "./userTypes";
 
 declare global {
   namespace Express {
     export interface Request {
-      currentUser: IUser;
+      currentUser: UserTypes.IUser;
     }
   }
 }

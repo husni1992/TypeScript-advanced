@@ -1,4 +1,4 @@
-import { IUser } from "./userTypes";
+import { UserTypes } from "./userTypes";
 
 /**
  * GenericPartialType: A TypeScript utility type for creating a new type based on an existing type (`Type`),
@@ -21,7 +21,7 @@ export type GenericPartialType<Type, MandatoryProperties extends keyof Type = ne
 };
 
 // example usage: In below implementation, all the fields are made optional except "id"
-let updateUser: GenericPartialType<IUser, "id"> = {
+let updateUser: GenericPartialType<UserTypes.IUser, "id"> = {
   id: "someid",
 };
 

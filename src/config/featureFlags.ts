@@ -10,7 +10,7 @@ type Feature = "ENABLE_RATE_LIMIT" | "ENABLE_MODIFYING_HOBBIES";
 
 const featureFlags: Record<Feature, FeatureDetails> = {
   ENABLE_RATE_LIMIT: { enabled: true, description: "Rate limiting" },
-  ENABLE_MODIFYING_HOBBIES: { enabled: false, description: "Hobbies endpoint" },
+  ENABLE_MODIFYING_HOBBIES: { enabled: true, description: "Hobbies endpoint" },
 };
 
 class FeatureFlags {
