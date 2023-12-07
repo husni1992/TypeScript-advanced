@@ -24,3 +24,10 @@ export type GenericPartialType<Type, MandatoryProperties extends keyof Type = ne
 let updateUser: GenericPartialType<IUser, "id"> = {
   id: "someid",
 };
+
+// TODO: add documentation and examples, this type is a variant of built-in Partial,
+// but with at-least one property mandatory
+// feature #21 Advanced Generics: more complex and flexible type definitions
+export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
+  ? Omit<Partial<T>, Keys> & Required<Pick<T, Keys>>
+  : never;
