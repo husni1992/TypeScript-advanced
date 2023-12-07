@@ -1,7 +1,7 @@
 // feature #3 Classes, UserService.ts
 
 import { MockCrudDatabase } from "../../data/Database";
-import { GenericDataService } from "./GenericService";
+import { GenericDataService } from "./GenericDataService";
 import { IUser, UserInfoBasedOnRole, UserRole } from "../../types/userTypes";
 
 /**
@@ -76,5 +76,9 @@ export class UserService extends GenericDataService<IUser> {
 
     // Return public information
     return this.getUserPublicInfo(idOfExpectedUser) as UserInfoBasedOnRole<T>;
+  }
+
+  async findActiveUsers() {
+    return this.repository.findByAttributes({ status: "ACTIVE" });
   }
 }

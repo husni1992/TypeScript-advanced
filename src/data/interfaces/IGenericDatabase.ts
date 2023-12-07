@@ -1,4 +1,4 @@
-import { GenericPartialType } from "../../types";
+import { RequireAtLeastOne, GenericPartialType } from "../../types";
 
 // feature #17 Utility type "Partial" constructs a type with all properties of Type set to optional
 export type Query<T> = Partial<Record<keyof T, any>>;
@@ -50,4 +50,11 @@ export interface IGenericDatabase<ItemType> {
    * @returns A boolean indicating whether the deletion was successful.
    */
   delete(id: string | number): Promise<boolean>;
+
+  /**
+   * Retrieves items matching specific attributes.
+   * @param attributes Filter criteria based on item properties.
+   * @returns A Promise resolving to an array of matching items.
+   */
+  findByAttributes(attributes: RequireAtLeastOne<ItemType>): Promise<ItemType[]>;
 }

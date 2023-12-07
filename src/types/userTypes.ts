@@ -52,6 +52,7 @@ type OtherInfo = {
 };
 
 // feature #14 Conditional types: Creating types that depend on other types or conditions
+// feature #21 Advanced Generics
 export type UserInfoBasedOnRole<T extends UserRole> = T extends UserRole.Admin
   ? PrivateInfo
   : T extends UserRole.User

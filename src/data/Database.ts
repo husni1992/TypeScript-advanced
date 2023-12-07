@@ -1,5 +1,6 @@
 import { IGenericDatabase, Query, Update } from "./interfaces/IGenericDatabase";
-import { GenericPartialType } from "../types";
+import { RequireAtLeastOne, GenericPartialType } from "../types";
+import { genericDataFilter } from "../utils/genericDataFilter";
 
 export class MockCrudDatabase<ItemType> implements IGenericDatabase<ItemType> {
   private storage: ItemType[] = [];
@@ -51,6 +52,11 @@ export class MockCrudDatabase<ItemType> implements IGenericDatabase<ItemType> {
   async delete(id: string | number): Promise<boolean> {
     this.storage = this.storage.filter((item) => (item as any).id !== id);
     return true;
+  }
+
+  async findByAttributes(attributes: RequireAtLeastOne<ItemType>): Promise<ItemType[]> {
+    const result = genericDataFilter(this.storage, attributes);
+    return result;
   }
 
   private matchesQuery(item: ItemType, query: Query<ItemType>): boolean {

@@ -2,7 +2,7 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import { UserController } from "../controllers/UserController";
 import { authUser } from "../middlewares/userAuth";
-import { Feature, featureFlagInstance } from "../../config/featureFlags";
+import { featureFlagInstance } from "../../config/featureFlags";
 
 const router = express.Router();
 const userController = new UserController();
@@ -23,6 +23,8 @@ const limiter = rateLimit({
 
 router.use("/users/:id/check-auth-level", rateLimitEnabled ? limiter : (req, res, next) => next());
 
+router.get("/users/getActiveUsers", userController.getActiveUsers);
+
 // Grouped route for /users/:id with chainable route handlers
 router
   .route("/users/:id")
@@ -38,5 +40,10 @@ router.get("/users/:id/getUserData", userController.getUserData);
 // Route for creating a user and adding hobbies
 router.route("/users").post(userController.createUser);
 router.post("/users/:id/hobbies", userController.addNewHobbies);
+
+// Catch-all for undefined routes
+router.use("*", (req, res) => {
+  res.status(404).json({ message: "Resource not found" });
+});
 
 export { router as userRoutes };

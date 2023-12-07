@@ -1,10 +1,9 @@
 import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
-import { GenericPartialType } from "../../types";
-
-import { DataService } from "../../data/interfaces/IDataService";
+import { RequireAtLeastOne, GenericPartialType } from "../../types";
+import { IDataService } from "../../data/interfaces/IDataService";
 
 // feature #6 Generic service class implementation
-export class GenericDataService<T> implements DataService<T> {
+export class GenericDataService<T> implements IDataService<T> {
   protected repository: IGenericDatabase<T>;
 
   constructor(repository: IGenericDatabase<T>) {
@@ -43,6 +42,14 @@ export class GenericDataService<T> implements DataService<T> {
       console.log("Successfully deleted!");
     } catch (err) {
       throw new Error("Delete failed!");
+    }
+  }
+
+  async findByAttributes(attributes: RequireAtLeastOne<T>): Promise<T[]> {
+    try {
+      return this.repository.findByAttributes(attributes);
+    } catch (err) {
+      throw new Error("Failed getting item provided attributes!");
     }
   }
 }

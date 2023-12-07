@@ -4,7 +4,7 @@ import { UserService } from "../services/UserService";
 import { MockCrudDatabase } from "../../data/Database";
 import { RequireRole } from "../../decorators/RequireRoleAuth";
 import { UserRole } from "../../types/userTypes";
-import { Feature, featureFlagInstance } from "../../config/featureFlags";
+import { featureFlagInstance } from "../../config/featureFlags";
 
 export class UserController {
   private mockDB = new MockCrudDatabase<User>();
@@ -78,5 +78,11 @@ export class UserController {
   checkAvailableAuthLevelOfUser = (req: Request, res: Response) => {
     const result = checkAvailableAuthLevelOfUser(req.params.id);
     res.status(200).send(result);
+  };
+
+  getActiveUsers = async (req: Request, res: Response) => {
+    const activeUsers = await this.userService.findActiveUsers();
+
+    res.send(activeUsers).status(200);
   };
 }
