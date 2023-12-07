@@ -6,10 +6,10 @@ import { IUser } from "./userTypes";
  *
  * This utility showcases several TypeScript features:
  *
- * 1. feature #13 Mapped Types: Iterates over the properties of 'Type' and modifies their optionality.
- * 2. feature #6 Generics: Uses generic parameters ('Type' and 'MandatoryProperties') for flexibility and reusability.
- * 3. feature #17 'Exclude' utility type to manipulate union types.
- * 4. feature #9 Union Types: Designed to work with union types as 'MandatoryProperties', allowing a union of keys from 'Type'.
+ * 1. feature #6 Generics: Uses generic parameters ('Type' and 'MandatoryProperties') for flexibility and reusability.
+ * 2. feature #9 Union Types: Designed to work with union types as 'MandatoryProperties', allowing a union of keys from 'Type'.
+ * 3. feature #13 Mapped Types: Iterates over the properties of 'Type' and modifies their optionality.
+ * 4. feature #17 'Exclude' utility type to manipulate union types.
  *
  * This utility is useful for creating types that are variations of existing ones, particularly in scenarios where
  * certain properties need to remain mandatory while others become optional.

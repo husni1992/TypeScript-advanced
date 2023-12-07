@@ -1,9 +1,14 @@
 import { Request, Response } from "express";
 import { UserRole } from "../types/userTypes";
 
+//FIXME: fix this to work with both regular functions and arrow functions
 // feature #15 Decorators enhance existing code with additional functionality at compile time.
 export function RequireRole(requiredRole: UserRole) {
-  return function (target: any, methodName: string, descriptor: PropertyDescriptor): PropertyDescriptor | void {
+  return function (
+    target: any,
+    methodName: string,
+    descriptor: PropertyDescriptor,
+  ): PropertyDescriptor | void {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (req: Request, res: Response) {

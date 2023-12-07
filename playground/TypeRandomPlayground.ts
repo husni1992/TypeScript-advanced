@@ -227,3 +227,49 @@ type Person = {
 };
 
 const p1 = new Result<Person>({ age: 31, name: "husnyh" });
+
+// Atleast one mandatory Partial
+
+type AtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
+  ? Omit<Partial<T>, Keys> & Required<Pick<T, Keys>>
+  : never;
+
+// Example usage
+type UserX = {
+  name: string;
+  age: number;
+  email: string;
+};
+
+// Type where at least one of the User properties is required
+type UserWithAtLeastOneField = AtLeastOne<UserX>;
+
+let u: UserWithAtLeastOneField = {
+  email: "asas",
+};
+
+// Function can be defined with a type or an interface both
+type GreetingFunctionType = (name: string) => string;
+interface GreetingFunctionInterface {
+  (name: string): string;
+}
+const greet1: GreetingFunctionType = (name) => `Hello, ${name}!`;
+const greet2: GreetingFunctionInterface = (name) => `Hello, ${name}!`;
+
+// removed 'readonly' attributes from a type
+type CreateMutable<Type> = {
+  -readonly [Property in keyof Type]: Type[Property];
+};
+
+type LockedAccount = {
+  readonly id: string;
+  readonly name: string;
+};
+
+type UnlockedAccount = CreateMutable<LockedAccount>;
+let v: UnlockedAccount = {
+  id: "1",
+  name: "foo",
+};
+
+v.id = "2"

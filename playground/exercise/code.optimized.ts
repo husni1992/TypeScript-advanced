@@ -121,7 +121,10 @@ function checkVehicle(vehicle: Vehicle, userType: UserType) {
   throw new Error("Invalid userType");
 }
 
-function getVehicleData<V extends Vehicle, U extends UserType>(vehicle: V, userType: U): DataByVehicleAndUser<V, U> {
+function getVehicleData<V extends Vehicle, U extends UserType>(
+  vehicle: V,
+  userType: U,
+): DataByVehicleAndUser<V, U> {
   return checkVehicle(vehicle, userType) as DataByVehicleAndUser<V, U>;
 }
 

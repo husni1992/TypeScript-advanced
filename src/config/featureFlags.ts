@@ -1,12 +1,12 @@
 // This is only for the demonstration of TS feature, utility type "Record",
 // there are areas of improvements to align with best practices, but not important in the context of this demo app.
-
+// feature #12 Type alias
 type FeatureDetails = {
   enabled: boolean;
   description: string;
 };
 
-export type Feature = "ENABLE_RATE_LIMIT" | "ENABLE_MODIFYING_HOBBIES";
+type Feature = "ENABLE_RATE_LIMIT" | "ENABLE_MODIFYING_HOBBIES";
 
 const featureFlags: Record<Feature, FeatureDetails> = {
   ENABLE_RATE_LIMIT: { enabled: true, description: "Rate limiting" },
@@ -46,4 +46,3 @@ class FeatureFlags {
 }
 
 export const featureFlagInstance = FeatureFlags.getInstance();
-
