@@ -42,8 +42,9 @@ export class User implements IUser {
    * @param status - The status to be checked.
    * @returns A boolean indicating if the status is a valid UserStatus.
    */
-  static isValidStatus(status: any): status is UserStatus {
-    return ["active", "inactive", "pending"].includes(status);
+  static isValidStatus(status: string): status is UserStatus {
+    const availableStatuses: UserStatus[] = ["ACTIVE", "INACTIVE", "PENDING"];
+    return availableStatuses.includes(status as UserStatus);
   }
 
   // feature #8 Tuples are a typed array with a pre-defined length and types for each index
