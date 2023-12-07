@@ -1,4 +1,4 @@
-import { ContactInfo, IUser, UserRole, UserStatus } from "../../types/userTypes";
+import { IUser, UserRole } from "../../types/userTypes";
 
 // 2. Class implementing the User interface (demonstrates TypeScript's class and type annotation features)
 export class User implements IUser {
@@ -23,14 +23,14 @@ export class User implements IUser {
   }
 
   /**
-   * // feature #7 User-defined type guard for UserStatus.
-   * This method checks if the given status is a valid UserStatus.
-   * If it returns true, TypeScript infers that the status is of type UserStatus within the scope it's used.
+   * // feature #7 User-defined type guard for IUser["status"].
+   * This method checks if the given status is a valid IUser["status"].
+   * If it returns true, TypeScript infers that the status is of type IUser["status"] within the scope it's used.
    * This helps in type narrowing, allowing for more type-safe code.
    *
    * Example:
    * if (User.isValidStatus(someStatus)) {
-   *     // Here, TypeScript knows someStatus is of type UserStatus
+   *     // Here, TypeScript knows someStatus is of type IUser["status"]
    * }
    *
    * if we define return type as boolean at line 74, then
@@ -40,11 +40,11 @@ export class User implements IUser {
    * }
    *
    * @param status - The status to be checked.
-   * @returns A boolean indicating if the status is a valid UserStatus.
+   * @returns A boolean indicating if the status is a valid IUser["status"].
    */
-  static isValidStatus(status: string): status is UserStatus {
-    const availableStatuses: UserStatus[] = ["ACTIVE", "INACTIVE", "PENDING"];
-    return availableStatuses.includes(status as UserStatus);
+  static isValidStatus(status: string): status is IUser["status"] {
+    const availableStatuses: IUser["status"][] = ["ACTIVE", "INACTIVE", "PENDING"];
+    return availableStatuses.includes(status as IUser["status"]);
   }
 
   // feature #8 Tuples are a typed array with a pre-defined length and types for each index

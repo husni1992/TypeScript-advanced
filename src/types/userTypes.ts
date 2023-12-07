@@ -7,23 +7,14 @@ interface PhoneContact {
   phoneNumber?: string;
 }
 
+export namespace UserType {}
+
 // feature #9 Intersection types
-export type ContactInfo = EmailContact & PhoneContact;
+type ContactInfo = EmailContact & PhoneContact;
 
 // feature #12 Type alias
 // Type Aliases allow defining types with a custom name (an Alias). In this example it's UserStatus
-export type UserStatus = "ACTIVE" | "INACTIVE" | "PENDING";
-
-// feature #2 Interface for User
-export interface IUser {
-  // feature #17 Utility Type "readonly": makes the properties of the constructed type cannot be reassigned
-  readonly id: string;
-  name: string;
-  role: UserRole;
-  contact: ContactInfo;
-  hobbies: string[];
-  status: UserStatus;
-}
+type Status = "ACTIVE" | "INACTIVE" | "PENDING";
 
 /**
  * feature #4: Enums is a way to define a set of named constants.
@@ -35,6 +26,17 @@ export enum UserRole {
   Admin = "ADMIN",
   User = "USER",
   Guest = "GUEST",
+}
+
+// feature #2 Interface for User
+export interface IUser {
+  // feature #17 Utility Type "readonly": makes the properties of the constructed type cannot be reassigned
+  readonly id: string;
+  name: string;
+  role: UserRole;
+  contact: ContactInfo;
+  hobbies: string[];
+  status: Status;
 }
 
 type PrivateInfo = {

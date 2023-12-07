@@ -1,6 +1,6 @@
 // This file is intended to be used as a temporary playground just to tryout some TS code and not used in anywhere in the app.
 
-import { UserInfoBasedOnRole, UserRole, UserStatus } from "../src/types/userTypes";
+import { UserInfoBasedOnRole, UserRole, IUser } from "../src/types/userTypes";
 
 type Car = {
   make?: string;
@@ -78,7 +78,7 @@ function zee<T extends UserRole>(obj: { role: T }): UserInfoBasedOnRole<T> {
 
   if (obj.role === UserRole.Guest) {
     return {
-      status: "foo" as UserStatus,
+      status: "foo" as IUser["status"],
       hobbies: ["foo"],
     } as UserInfoBasedOnRole<T>;
   }
@@ -272,4 +272,4 @@ let v: UnlockedAccount = {
   name: "foo",
 };
 
-v.id = "2"
+v.id = "2";
