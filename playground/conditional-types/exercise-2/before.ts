@@ -14,9 +14,9 @@ type _Motorbike = {
   type: string; // e.g., "Cruiser", "Sport"
 };
 
-type _Vehicle = Car | Truck | Motorbike;
+type _Vehicle = _Car | _Truck | _Motorbike;
 
-function checkVehicle(vehicle: Vehicle, userRole: string) {
+function _checkVehicle(vehicle: _Vehicle, userRole: string) {
   if (userRole === "Mechanic") {
     if ("mileage" in vehicle) {
       return `Car Make: ${vehicle.make}, Model: ${vehicle.model}, Mileage: ${vehicle.mileage}`;
@@ -34,10 +34,10 @@ function checkVehicle(vehicle: Vehicle, userRole: string) {
 }
 
 // Example usage:
-const myCar: Car = {
+const myCar: _Car = {
   make: "Toyota",
   model: "Corolla",
   mileage: 20000,
 };
 
-console.log(checkVehicle(myCar, "Mechanic"));
+console.log(_checkVehicle(myCar, "Mechanic"));

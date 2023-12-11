@@ -2,7 +2,7 @@
 //feature #5 Generics: Demonstration of complex use of Generics in TypeScript
 //feature #21 Advanced Generics: Demonstration of complex use of Generics in TypeScript
 
-import { bookMock, dvdMock, magazineMock } from "./mocks";
+import { bookMock, dvdMock, magazineMock } from "../mocks";
 
 export type Book = {
   title: string;
