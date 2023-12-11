@@ -1,31 +1,30 @@
 # Mastering TypeScript: From Basics to Advanced
-
-As JavaScript developers, we often underutilize the full potential of TypeScript in our day-to-day coding. TypeScript offers a plethora of advanced features that many of us might not be familiar with. This project is a journey to master TypeScript, covering a wide range of features from the basic to the advanced. Our focus will be on the following features, with the understanding that this list may evolve and expand over time.
+As JavaScript developers, we often miss out on the full potential of TypeScript in our everyday coding. TypeScript has a lot of powerful features that can enhance our development work. In this project, we're on a journey to become TypeScript experts. We'll cover a range of features, starting from the basics and gradually moving to more advanced topics. Our main focus will be on the following TypeScript features:
 
 ## Features We'll Explore
-
-1. **Type Annotations**: Defining types for variables, parameters, and return types.
-2. **Interfaces**: Creating the `IUser` interface to define the structure of user objects.
-3. **Classes**: Implementing the `User` class to create user objects.
-4. **Enums**: Using the `UserRole` enum to define user roles.
-5. **Functions**: Developing various functions in services and controllers.
-6. **Generics**: Creating a reusable service class with `GenericService<T>`.
-7. **Type Guards**: Implementing the `isUser` function to check if an object is an instance of `User`.
-8. **Tuples**: (Implementation Pending)
-9. **Union and Intersection Types**: (Implementation Pending)
-10. **Literal Types**: (Implementation Pending)
-11. **Nullable Types**: Incorporating optional properties in interfaces and classes.
-12. **Type Aliases**: (Implementation Pending)
-13. **Mapped Types**: (Implementation Pending)
-14. **Conditional Types**: (Implementation Pending)
-15. **Decorators**: (Implementation Pending)
-16. **Mixins**: (Implementation Pending)
-17. **Utility Types**: (Implementation Pending)
-18. **Advanced Types**: (Implementation Pending)
-19. **Module Augmentation**: (Implementation Pending)
-20. **Namespaces**: (Implementation Pending)
-21. **Advanced Generics**: (Implementation Pending)
+| Feature                | Status     | Description                                            |
+|------------------------|----------- |--------------------------------------------------------|
+| 1. Type Annotations    | ✅ Done    | Specify types for variables, parameters, returns.      |
+| 2. Interfaces          | ✅ Done    | Define structure for objects and contracts.            |
+| 3. Classes             | ✅ Done    | Blueprint for creating objects with methods & props.   |
+| 4. Enums               | ✅ Done    | Set of named constants; usable as objects in JS.       |
+| 5. Generics            | ✅ Done    | Create flexible, reusable components with types.       |
+| 6. Type Guards         | ✅ Done    | Runtime type check returning boolean on verification.  |
+| 7. Tuples              | ✅ Done    | Fixed-length arrays with typed elements.               |
+| 8. Union Types         | ✅ Done    | Combine multiple types into one.                       |
+| 9. Intersection Types  | ✅ Done    | Merge types by combining properties.                   |
+| 10. Literal Types      | ✅ Done    | Restrict types to specific values.                     |
+| 11. Nullable Types     | ✅ Done    | Allow types to be null or undefined.                   |
+| 12. Type Aliases       | ✅ Done    | Custom type definitions for readability.               |
+| 13. Mapped Types       | ✅ Done    | Transform types by iterating over properties.          |
+| 14. Conditional Types  | ✅ Done    | Types dependent on conditions.                         |
+| 15. Decorators         | ✅ Done    | Annotate and modify classes, functions and properties. |
+| 16. Mixins             | ❌ Pending | Combine multiple classes into one.                     |
+| 17. Utility Types      | 🚧 Ongoing | Built-in types for common type transformations.        |
+| 18. Advanced Types     | ❌ Pending | Explore complex type patterns and techniques.          |
+| 19. Module Augmentation| ❌ Pending | Extend modules with additional features.               |
+| 20. Namespaces         | ✅ Done    | Organize code with logical grouping.                   |
+| 21. Advanced Generics  | ✅ Done    | Extend generics for complex use cases.                 |
 
 ## Project Goals
-
-This initiative is one of my key goals for 2023 at [Your Company Name]. This repository will serve as a comprehensive reference for every developer working with TypeScript. It aims to not only enhance our collective understanding of TypeScript's capabilities but also to streamline our development processes by leveraging its advanced features.
+This initiative is one of my key goals for 2023. This repository will serve as a comprehensive reference for every developer working with TypeScript. It aims to not only enhance our collective understanding of TypeScript's capabilities but also to streamline our development processes by leveraging its advanced features.
