@@ -5,13 +5,14 @@ export namespace UserTypes {
   }
 
   interface PhoneContact {
-    // feature #11 Optional property, Typescript's nullable types
+    // feature #11 Nullable Types, Optional property
     phoneNumber?: string;
   }
 
   // feature #9 Intersection types
   type ContactInfo = EmailContact & PhoneContact;
 
+  // feature #10 Literal Types: enables string values as valid return types.
   // feature #12 Type alias
   // Type Aliases allow defining types with a custom name (an Alias). In this example it's UserStatus
   type Status = "ACTIVE" | "INACTIVE" | "PENDING";
@@ -28,7 +29,7 @@ export namespace UserTypes {
     Guest = "GUEST",
   }
 
-  // feature #2 Interface for User
+  // feature #2 Interface is what defines the structure of an object by specifying the properties and methods it should have
   export interface IUser {
     // feature #17 Utility Type "readonly": makes the properties of the constructed type cannot be reassigned
     readonly id: string;

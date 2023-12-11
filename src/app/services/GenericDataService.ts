@@ -2,7 +2,7 @@ import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 import { IDataService } from "../../data/interfaces/IDataService";
 
-// feature #6 Generic service class implementation
+// feature #5 Generic service class implementation
 export class GenericDataService<T> implements IDataService<T> {
   protected repository: IGenericDatabase<T>;
 

@@ -6,6 +6,7 @@ export type Query<T> = Partial<Record<keyof T, any>>;
 export type Update<T> = { $set?: Partial<T>; $push?: Partial<T> };
 
 /**
+ * feature #2 Interface is what defines the structure of an object by specifying the properties and methods it should have.
  * Interface for CRUD operations on a database.
  * This interface decouples the actual database implementation from the consumers of the database.
  * It allows for flexibility in changing the database implementation without affecting the code

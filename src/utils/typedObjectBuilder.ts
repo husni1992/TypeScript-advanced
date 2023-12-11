@@ -7,7 +7,7 @@
  * Ensures that the properties object contains all the keys and values of the specified type.
  *
  * // feature #13 Mapped Types
- * // feature #6 Generics
+ * // feature #5 Generics
  */
 export class TypedObjectBuilder<Properties> {
   /**

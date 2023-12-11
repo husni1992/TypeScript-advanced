@@ -6,10 +6,12 @@ import { UserTypes } from "./userTypes";
  *
  * This utility showcases several TypeScript features:
  *
- * 1. feature #6 Generics: Uses generic parameters ('Type' and 'MandatoryProperties') for flexibility and reusability.
- * 2. feature #9 Union Types: Designed to work with union types as 'MandatoryProperties', allowing a union of keys from 'Type'.
- * 3. feature #13 Mapped Types: Iterates over the properties of 'Type' and modifies their optionality.
- * 4. feature #17 'Exclude' utility type to manipulate union types.
+ * 1. feature #5 Generics: Uses generic parameters ('Type' and 'MandatoryProperties') for flexibility and reusability.
+ * 2. feature #8 Union Types: Designed to work with union types as 'MandatoryProperties', allowing a union of keys from 'Type'.
+ * 3. feature #9 Intersection Types, & operator combines the two sets of properties using an intersection type.
+ * 4. feature #11 Nullable types
+ * 5. feature #13 Mapped Types: Iterates over the properties of 'Type' and modifies their optionality.
+ * 6. feature #17 'Exclude' utility type to manipulate union types.
  *
  * This utility is useful for creating types that are variations of existing ones, particularly in scenarios where
  * certain properties need to remain mandatory while others become optional.
@@ -27,7 +29,20 @@ let updateUser: GenericPartialType<UserTypes.IUser, "id"> = {
 
 // TODO: add documentation and examples, this type is a variant of built-in Partial,
 // but with at-least one property mandatory
+// feature #9 Intersection Types
+// feature #13 Mapped Types: uses a mapped type to make certain properties optional.
 // feature #21 Advanced Generics: more complex and flexible type definitions
 export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
   ? Omit<Partial<T>, Keys> & Required<Pick<T, Keys>>
   : never;
+
+
+// This ensures at-least one property of UserTypes.IUser is assigned.
+let example1: RequireAtLeastOne<UserTypes.IUser> = {
+  name: "foo"
+};
+
+// Makes all properties optional except id
+let example2: RequireAtLeastOne<UserTypes.IUser, "id"> = {
+  id: "011"
+};

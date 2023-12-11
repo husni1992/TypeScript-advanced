@@ -6,6 +6,7 @@ type FeatureDetails = {
   description: string;
 };
 
+// feature #10 Literal Types: enables string values as valid return types.
 type Feature = "ENABLE_RATE_LIMIT" | "ENABLE_MODIFYING_HOBBIES";
 
 const featureFlags: Record<Feature, FeatureDetails> = {

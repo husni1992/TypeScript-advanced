@@ -1,4 +1,4 @@
-// feature #3 Classes, UserService.ts
+// feature #3 Class is a blueprint for creating objects
 
 import { MockCrudDatabase } from "../../data/Database";
 import { GenericDataService } from "./GenericDataService";
@@ -13,7 +13,8 @@ export class UserService extends GenericDataService<UserTypes.IUser> {
   }
 
   /* 
-    // feature 9# Union types
+    // feature #1 Type annotation: specifies what types of data to expect and provide.
+    // feature #8 Union types
     TypeScript will only allow an operation if it is valid for every member of the union. For example, 
     if you have the union string | string[], you can’t use methods that are only available on string.
     In below function, you can run 'toUpperCase' method only when it's a single string and not array.
@@ -29,7 +30,8 @@ export class UserService extends GenericDataService<UserTypes.IUser> {
     return input;
   }
 
-  async addNewHobbies(id: string, hobbies: string[]) {
+  // feature #1 Type annotation: specifies what types of data to expect and provide.
+  async addNewHobbies(id: string, hobbies: string[]): Promise<void> {
     await this.repository.updateOne(
       { id },
       {

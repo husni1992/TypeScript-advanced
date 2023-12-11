@@ -11,7 +11,7 @@ export class User implements UserTypes.IUser {
     public status: UserTypes.IUser["status"],
   ) {}
 
-  // feature #7 Implement User-defined type guard for validating user inputs
+  // feature #6 Implement User-defined type guard for validating user inputs
   static isUser(obj: any): obj is User {
     return (
       typeof obj.id === "string" &&
@@ -23,7 +23,7 @@ export class User implements UserTypes.IUser {
   }
 
   /**
-   * // feature #7 User-defined type guard for UserTypes.IUser["status"].
+   * // feature #6 User-defined type guard for UserTypes.IUser["status"].
    * This method checks if the given status is a valid UserTypes.IUser["status"].
    * If it returns true, TypeScript infers that the status is of type UserTypes.IUser["status"] within the scope it's used.
    * This helps in type narrowing, allowing for more type-safe code.
@@ -47,7 +47,7 @@ export class User implements UserTypes.IUser {
     return availableStatuses.includes(status as UserTypes.IUser["status"]);
   }
 
-  // feature #8 Tuples are a typed array with a pre-defined length and types for each index
+  // feature #7 Tuples are a typed array with a pre-defined length and types for each index
   static isValidUserEmail(email: string): [boolean, string] {
     const isValid = email.includes("@"); // Simple email validation
     const message = isValid ? "Valid user email" : "Invalid user email";
@@ -55,13 +55,12 @@ export class User implements UserTypes.IUser {
   }
 }
 
-// feature #10 Literal Types
-// It enables string values as valid return types.
+// feature #10 Literal Types: enables string values as valid return types.
 export function checkAvailableAuthLevelOfUser(id: string): "READ" | "WRITE" | "DELETE" | "ADMIN" {
   return "READ";
 }
 
-// feature #6 Generic Functions
+// feature #5 Generic Functions
 export function getItems<T>(items: T[]): T[] {
   return items;
 }

@@ -57,7 +57,7 @@ exampleWithAny(5); // Works, but no type safety
 // end of any vs unknown
 
 /*
-// feature #6 Generic Type Constraint
+// feature #5 Generic Type Constraint
   In below example. the T extends UserTypes.IUser["role"] means that the generic type T can be any type 
   that is compatible with the type of the role property in the UserTypes.IUser interface. 
   It's like saying, "T can be any type, as long as it's the same type as UserTypes.IUser["role"] or a subtype of it."
@@ -273,3 +273,14 @@ let v: UnlockedAccount = {
 };
 
 v.id = "2";
+
+
+// Mapped type example
+
+type Fruit = "Apple" | "Banana" | "Orange";
+
+type FruitName<T extends Fruit> = `Fruit: ${T}`;
+
+const fruit1: FruitName<"Apple"> = "Fruit: Apple";
+const fruit2: FruitName<"Banana"> = "Fruit: Banana";
+const fruit3: FruitName<"Orange"> = "Fruit: Orange";

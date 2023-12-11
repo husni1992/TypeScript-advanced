@@ -1,5 +1,5 @@
 //feature #14 Conditional types: Demonstration of complex use of conditional types and Generics in TypeScript
-//feature #6 Generics: Demonstration of complex use of Generics in TypeScript
+//feature #5 Generics: Demonstration of complex use of Generics in TypeScript
 //feature #21 Advanced Generics: Demonstration of complex use of Generics in TypeScript
 
 import { bookMock, dvdMock, magazineMock } from "./mocks";
