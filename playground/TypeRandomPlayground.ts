@@ -1,5 +1,6 @@
 // This file is intended to be used as a temporary playground just to tryout some TS code and not used in anywhere in the app.
 
+import { AnyARecord } from "dns";
 import { UserTypes } from "../src/types/userTypes";
 
 type Car = {
@@ -274,7 +275,6 @@ let v: UnlockedAccount = {
 
 v.id = "2";
 
-
 // Mapped type example
 
 type Fruit = "Apple" | "Banana" | "Orange";
@@ -284,3 +284,103 @@ type FruitName<T extends Fruit> = `Fruit: ${T}`;
 const fruit1: FruitName<"Apple"> = "Fruit: Apple";
 const fruit2: FruitName<"Banana"> = "Fruit: Banana";
 const fruit3: FruitName<"Orange"> = "Fruit: Orange";
+
+// Template literals
+// ex1
+type World = "world";
+type Greeting = `hello ${World}`;
+
+let rrrr: Greeting = "hello world";
+
+// ex2
+type EmailLocaleIDs = "welcome_email" | "email_heading";
+type FooterLocaleIDs = "footer_title" | "footer_sendoff";
+
+type AllLocaleIDs = `${EmailLocaleIDs | FooterLocaleIDs}_id`;
+let _R: AllLocaleIDs = "footer_title_id";
+
+// ex3
+type Lang = "en" | "ja" | "pt";
+
+type LocaleMessageIDs = `${Lang}_${AllLocaleIDs}`;
+let _t: LocaleMessageIDs = "pt_email_heading_id";
+
+// ex3 Complex use case
+
+type BaseObjectType = { firstName: string; lastName: string; age: number };
+
+type PropEventSource<Type> = {
+  on(
+    eventName: `${string & keyof Type}Changed`,
+    callback: <R extends string>(newValue: R) => void,
+  ): void;
+};
+
+const passedObject: BaseObjectType = {
+  firstName: "Saoirse",
+  lastName: "Ronan",
+  age: 26,
+};
+
+function removeChangedFromEnd(input) {
+  // Check if the input ends with "Changed"
+  if (input.endsWith("Changed")) {
+    // Remove the last 7 characters (i.e., "Changed")
+    return input.substring(0, input.length - 7);
+  }
+  // Return the input unchanged if it doesn't end with "Changed"
+  return input;
+}
+
+function makeWatchedObject<Type>(baseObject: Type): Type & PropEventSource<Type> {
+  return {
+    ...baseObject,
+    on: function (eventName: string, callback: Function) {
+      const keyOfChangedProp = removeChangedFromEnd(eventName);
+
+      callback(baseObject[keyOfChangedProp]);
+    },
+  };
+}
+
+const person = makeWatchedObject<BaseObjectType>(passedObject);
+person.on("firstNameChanged", function (p: string) {
+  console.log("callback run", p);
+});
+
+// interfaces
+// ex1 Index Signatures
+interface StringMap {
+  [key: string]: "string" | "BOOL";
+}
+
+const map: StringMap = { greeting: "BOOL", farewell: "string" };
+
+// ex2 Function Types
+interface BinaryOperationByInterface {
+  (operand1: number, operand2: number): number;
+}
+
+type BinaryOperationByType = (operand1: number, operand2: number) => number;
+
+// the both of above gives same output
+const add1: BinaryOperationByInterface = (x, y) => x + y;
+const add2: BinaryOperationByType = (x, y) => x + y;
+
+//  ex3 Hybrid Types
+interface Counter {
+  interval: number;
+  reset(): void;
+  (start: number): string;
+}
+
+function getCounter() {
+  const m = function(start: number){
+
+  }
+
+  m.
+}
+
+let r = getCounter();
+ 
