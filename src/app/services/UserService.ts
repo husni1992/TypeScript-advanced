@@ -1,10 +1,9 @@
-// feature #3 Class is a blueprint for creating objects
-
 import { MockCrudDatabase } from "../../data/Database";
 import { GenericDataService } from "./GenericDataService";
 import { UserTypes } from "../../types/userTypes";
 
 /**
+ * feature #3 Class is a blueprint for creating objects
  * Service class for user-related operations, extending GenericService
  */
 export class UserService extends GenericDataService<UserTypes.IUser> {
@@ -13,8 +12,8 @@ export class UserService extends GenericDataService<UserTypes.IUser> {
   }
 
   /* 
-    // feature #1 Type annotation: specifies what types of data to expect and provide.
-    // feature #8 Union types
+    // feature #1 Type annotation is used to specify the data type of a variable, parameter, or return value explicitly
+    // feature #7 Union types allows for a value to be one of several types
     TypeScript will only allow an operation if it is valid for every member of the union. For example, 
     if you have the union string | string[], you can’t use methods that are only available on string.
     In below function, you can run 'toUpperCase' method only when it's a single string and not array.
@@ -30,7 +29,7 @@ export class UserService extends GenericDataService<UserTypes.IUser> {
     return input;
   }
 
-  // feature #1 Type annotation: specifies what types of data to expect and provide.
+  // feature #1 Type annotation is used to specify the data type of a variable, parameter, or return value explicitly
   async addNewHobbies(id: string, hobbies: string[]): Promise<void> {
     await this.repository.updateOne(
       { id },

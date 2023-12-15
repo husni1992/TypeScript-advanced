@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserTypes } from "../types/userTypes";
 
 //FIXME: fix this to work with both regular functions and arrow functions
-// feature #15 Decorators enhance existing code with additional functionality at compile time.
+// feature #17 Decorators are functions that modify class, method, property, or parameter behavior and metadata at compile or runtime.
 export function RequireRole(requiredRole: UserTypes.Role) {
   return function (
     target: any,

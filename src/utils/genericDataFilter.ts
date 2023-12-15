@@ -2,7 +2,7 @@ import { RequireAtLeastOne } from "../types";
 
 /**
  * Filters an array of objects based on a filter object with at least one non-null property match.
- * // feature #21 Advanced Generics: more complex and flexible type definitions
+ * // feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
  * @template T - The type of objects in the array.
  * @param {T[]} items - The array of objects to filter.
  * @param {RequireAtLeastOne<T>} filter - The filter criteria object.

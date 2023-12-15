@@ -18,7 +18,8 @@ export class UserController {
     }
 
     const userStatus = req.body.status;
-    if (!User.isValidStatus(userStatus)) {
+    const bol = User.isValidStatus(userStatus);
+    if (!bol) {
       res.status(400).send("Invalid status!");
       return;
     }

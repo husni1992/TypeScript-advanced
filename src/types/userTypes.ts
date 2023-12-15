@@ -1,19 +1,19 @@
-// feature #20 Namespaces: helps in organizing code into named groups, making it easier to manage and use in larger applications
+// feature #14 Namespaces help in organizing code into named groups, making it easier to manage and use in larger applications
 export namespace UserTypes {
   interface EmailContact {
     email: string;
   }
 
   interface PhoneContact {
-    // feature #11 Nullable Types, Optional property
+    // feature #6 Nullable Types, Optional property
     phoneNumber?: string;
   }
 
-  // feature #9 Intersection types
+  // feature #8 Intersection Types combines types into one by merging their properties and creating a new type.
   type ContactInfo = EmailContact & PhoneContact;
 
-  // feature #10 Literal Types: enables string values as valid return types.
-  // feature #12 Type alias
+  // feature #12 Literal Types enable string values as valid return types.
+  // feature #5 Type aliases are custom type definitions to simplify complex type signatures
   // Type Aliases allow defining types with a custom name (an Alias). In this example it's UserStatus
   type Status = "ACTIVE" | "INACTIVE" | "PENDING";
 
@@ -31,8 +31,9 @@ export namespace UserTypes {
 
   // feature #2 Interface is what defines the structure of an object by specifying the properties and methods it should have
   export interface IUser {
-    // feature #17 Utility Type "readonly": makes the properties of the constructed type cannot be reassigned
+    // feature #13 Utility Types "readonly": makes the properties of the constructed type cannot be reassigned
     readonly id: string;
+    // feature #1 Type annotation is used to specify the data type of a variable, parameter, or return value explicitly
     name: string;
     role: Role;
     contact: ContactInfo;
@@ -54,8 +55,8 @@ export namespace UserTypes {
     name: IUser["name"];
   };
 
-  // feature #14 Conditional types: Creating types that depend on other types or conditions
-  // feature #21 Advanced Generics
+  // feature #16 Conditional Types define types that are determined based on conditional logic, allowing for types to change based on the input types
+  // feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
   export type UserInfoBasedOnRole<T extends Role> = T extends Role.Admin
     ? PrivateInfo
     : T extends Role.User

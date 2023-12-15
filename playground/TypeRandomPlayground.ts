@@ -11,14 +11,14 @@ type Car = {
 
 // Utility types
 
-// feature #17: Utility Type "Required": makes every field required
+// feature #13 Utility Types "Required": makes every field required
 let myCar1: Required<Car> = {
   make: "BMW",
   mileage: 322333,
   model: "E46",
 };
 
-// feature #17: Utility Type "Uppercase": makes string type mandatory to be Uppercase
+// feature #13 Utility Types "Uppercase": makes string type mandatory to be Uppercase
 type A = "one" | "two";
 type B = Uppercase<A>;
 
@@ -58,7 +58,7 @@ exampleWithAny(5); // Works, but no type safety
 // end of any vs unknown
 
 /*
-// feature #5 Generic Type Constraint
+// feature #9 Generics enables reusable code for multiple data types with type safety
   In below example. the T extends UserTypes.IUser["role"] means that the generic type T can be any type 
   that is compatible with the type of the role property in the UserTypes.IUser interface. 
   It's like saying, "T can be any type, as long as it's the same type as UserTypes.IUser["role"] or a subtype of it."

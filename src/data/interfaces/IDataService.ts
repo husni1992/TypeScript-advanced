@@ -1,8 +1,8 @@
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 
 // feature #2 Interface is what defines the structure of an object by specifying the properties and methods it should have
-// feature #5 Generic interface
-// feature #8 Union types, the return types with multiple types is a union type, example: getById
+// feature #9 Generics enables reusable code for multiple data types with type safety
+// feature #7 Union types allows for a value to be one of several types
 export interface IDataService<T> {
   create(item: T): Promise<T>;
   getById(id: string): Promise<T | undefined>;

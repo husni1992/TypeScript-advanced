@@ -1,8 +1,9 @@
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 
-// feature #17 Utility type "Partial" constructs a type with all properties of Type set to optional
+// feature #13 Utility Types "Partial" constructs a type with all properties of Type set to optional
 export type Query<T> = Partial<Record<keyof T, any>>;
 
+// feature #6 Nullable Types, Optional property
 export type Update<T> = { $set?: Partial<T>; $push?: Partial<T> };
 
 /**

@@ -6,12 +6,11 @@ import { UserTypes } from "./userTypes";
  *
  * This utility showcases several TypeScript features:
  *
- * 1. feature #5 Generics: Uses generic parameters ('Type' and 'MandatoryProperties') for flexibility and reusability.
- * 2. feature #8 Union Types: Designed to work with union types as 'MandatoryProperties', allowing a union of keys from 'Type'.
- * 3. feature #9 Intersection Types, & operator combines the two sets of properties using an intersection type.
- * 4. feature #11 Nullable types
- * 5. feature #13 Mapped Types: Iterates over the properties of 'Type' and modifies their optionality.
- * 6. feature #17 'Exclude' utility type to manipulate union types.
+ * 1. feature #9 Generics enables reusable code for multiple data types with type safety
+ * 2. feature #8 Intersection Types combines types into one by merging their properties and creating a new type.
+ * 3. feature #6 Nullable types
+ * 4. feature #15 Mapped Types generate new types by transforming existing ones, iterating over their properties and applying modifications
+ * 5. feature #13 'Exclude' utility type to manipulate union types.
  *
  * This utility is useful for creating types that are variations of existing ones, particularly in scenarios where
  * certain properties need to remain mandatory while others become optional.
@@ -27,11 +26,11 @@ let updateUser: GenericPartialType<UserTypes.IUser, "id"> = {
   id: "someid",
 };
 
-// TODO: add documentation and examples, this type is a variant of built-in Partial,
+// This generic type is a variant of built-in Partial,
 // but with at-least one property mandatory
-// feature #9 Intersection Types
-// feature #13 Mapped Types: uses a mapped type to make certain properties optional.
-// feature #21 Advanced Generics: more complex and flexible type definitions
+// feature #8 Intersection Types combines types into one by merging their properties and creating a new type.
+// feature #15 Mapped Types generate new types by transforming existing ones, iterating over their properties and applying modifications
+// feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
 export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
   ? Omit<Partial<T>, Keys> & Required<Pick<T, Keys>>
   : never;

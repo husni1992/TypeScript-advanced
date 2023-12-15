@@ -1,5 +1,5 @@
 /**
- * feature #16 Mixins in TypeScript
+ * feature #18 Mixins combine functionality from multiple sources into a single class, avoiding complex inheritance
  * ---------------------------------
  * Mixins are a design pattern that allow a class to inherit (mix in) methods and properties from multiple sources.
  * This addresses the limitation of not being able to extend multiple classes, as TypeScript follows single inheritance.

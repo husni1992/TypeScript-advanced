@@ -11,7 +11,7 @@ export class User implements UserTypes.IUser {
     public status: UserTypes.IUser["status"],
   ) {}
 
-  // feature #6 Implement User-defined type guard for validating user inputs
+  // feature #10 Type Guards are Functions that check and narrow variable types, whether at runtime or compile time
   static isUser(obj: any): obj is User {
     return (
       typeof obj.id === "string" &&
@@ -23,21 +23,10 @@ export class User implements UserTypes.IUser {
   }
 
   /**
-   * // feature #6 User-defined type guard for UserTypes.IUser["status"].
+   * // feature #10 Type Guards are Functions that check and narrow variable types, whether at runtime or compile time
    * This method checks if the given status is a valid UserTypes.IUser["status"].
    * If it returns true, TypeScript infers that the status is of type UserTypes.IUser["status"] within the scope it's used.
    * This helps in type narrowing, allowing for more type-safe code.
-   *
-   * Example:
-   * if (User.isValidStatus(someStatus)) {
-   *     // Here, TypeScript knows someStatus is of type UserTypes.IUser["status"]
-   * }
-   *
-   * if we define return type as boolean at line 74, then
-   * if (User.isValidStatus(someStatus)) {
-   *     // Here, TypeScript does NOT know the specific type of someStatus
-   *     // It could still be 'any'
-   * }
    *
    * @param status - The status to be checked.
    * @returns A boolean indicating if the status is a valid UserTypes.IUser["status"].
@@ -47,7 +36,7 @@ export class User implements UserTypes.IUser {
     return availableStatuses.includes(status as UserTypes.IUser["status"]);
   }
 
-  // feature #7 Tuples are a typed array with a pre-defined length and types for each index
+  // feature #11 Tuples are a typed array with a pre-defined length and types for each index
   static isValidUserEmail(email: string): [boolean, string] {
     const isValid = email.includes("@"); // Simple email validation
     const message = isValid ? "Valid user email" : "Invalid user email";
@@ -55,12 +44,12 @@ export class User implements UserTypes.IUser {
   }
 }
 
-// feature #10 Literal Types: enables string values as valid return types.
+// feature #12 Literal Types enable string values as valid return types.
 export function checkAvailableAuthLevelOfUser(id: string): "READ" | "WRITE" | "DELETE" | "ADMIN" {
   return "READ";
 }
 
-// feature #5 Generic Functions
+// feature #9 Generics enables reusable code for multiple data types with type safety
 export function getItems<T>(items: T[]): T[] {
   return items;
 }

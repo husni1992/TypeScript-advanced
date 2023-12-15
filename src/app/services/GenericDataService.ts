@@ -2,7 +2,8 @@ import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 import { IDataService } from "../../data/interfaces/IDataService";
 
-// feature #5 Generic service class implementation
+// feature #3 Class is a blueprint for creating objects
+// feature #9 Generics enables reusable code for multiple data types with type safety
 export class GenericDataService<T> implements IDataService<T> {
   protected repository: IGenericDatabase<T>;
 

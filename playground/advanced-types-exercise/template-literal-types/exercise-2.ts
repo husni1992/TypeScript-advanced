@@ -1,3 +1,5 @@
+// feature #21 Template Literals used for defining types and string interpolation within backticks (`)
+
 type PropEventSource2<Type> = {
   on<Key extends string & keyof Type>(
     eventName: `${Key}Changed`,

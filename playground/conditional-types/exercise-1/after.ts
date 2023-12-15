@@ -1,6 +1,8 @@
-//feature #14 Conditional types: Demonstration of complex use of conditional types and Generics in TypeScript
-//feature #5 Generics: Demonstration of complex use of Generics in TypeScript
-//feature #21 Advanced Generics: Demonstration of complex use of Generics in TypeScript
+
+// This implementation demonstrates some complex use of Generics and Mapped Types in TypeScript
+//feature #16 Conditional Types define types that are determined based on conditional logic, allowing for types to change based on the input types
+//feature #9 Generics enables reusable code for multiple data types with type safety
+//feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
 
 import { bookMock, dvdMock, magazineMock } from "../mocks";
 
@@ -34,7 +36,7 @@ enum UserRole {
 type LibraryItem = Book | Magazine | DVD;
 
 // Conditional type that picks certain properties from library items based on the user role 'Member'
-// feature #17 Utility Type "Pick": Constructs a type by picking the set of properties Keys from Type
+// feature #13 Utility Types "Pick": Constructs a type by picking the set of properties Keys from Type
 type MemberOnlyData<L extends LibraryItem> = L extends Book
   ? Pick<Book, "title" | "author" | "isbn">
   : L extends Magazine

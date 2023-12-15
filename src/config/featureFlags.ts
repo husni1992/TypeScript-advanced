@@ -1,12 +1,12 @@
 // This is only for the demonstration of TS feature, utility type "Record",
 // there are areas of improvements to align with best practices, but not important in the context of this demo app.
-// feature #12 Type alias
+// feature #5 Type aliases are custom type definitions to simplify complex type signatures
 type FeatureDetails = {
   enabled: boolean;
   description: string;
 };
 
-// feature #10 Literal Types: enables string values as valid return types.
+// feature #12 Literal Types enable string values as valid return types.
 type Feature = "ENABLE_RATE_LIMIT" | "ENABLE_MODIFYING_HOBBIES";
 
 const featureFlags: Record<Feature, FeatureDetails> = {
@@ -17,7 +17,7 @@ const featureFlags: Record<Feature, FeatureDetails> = {
 class FeatureFlags {
   private static instance: FeatureFlags;
 
-  // feature #17: Utility Type "Record" constructs an object type whose property keys are Keys and whose property values are Type
+  // feature #13 Utility Types "Record" constructs an object type whose property keys are Keys and whose property values are Type
   private flags: Record<Feature, FeatureDetails>;
 
   constructor(flags: Record<Feature, FeatureDetails> = featureFlags) {

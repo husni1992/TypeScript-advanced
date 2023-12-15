@@ -6,8 +6,8 @@
  * This properties of this class are typed with a specific interface or type.
  * Ensures that the properties object contains all the keys and values of the specified type.
  *
- * // feature #13 Mapped Types
- * // feature #5 Generics
+ * // feature #15 Mapped Types generate new types by transforming existing ones, iterating over their properties and applying modifications
+ * // feature #9 Generics enables reusable code for multiple data types with type safety
  */
 export class TypedObjectBuilder<Properties> {
   /**

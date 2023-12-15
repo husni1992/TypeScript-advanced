@@ -1,3 +1,5 @@
+// feature #21 Template Literals used for defining types and string interpolation within backticks (`)
+
 function removeChangedFromEnd(input: string) {
   // Check if the input ends with "Changed"
   if (input.endsWith("Changed")) {
