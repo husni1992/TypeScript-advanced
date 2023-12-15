@@ -4,30 +4,47 @@ TypeScript has become an essential tool in modern web development, empowering de
 
 ## Features We'll Explore
 
-| Feature                 | Status     | Description                                             |
-| ----------------------- | ---------- | ------------------------------------------------------- |
-| 1. Type Annotations     | ✅ Done    | Specify types for variables, parameters, returns.       |
-| 2. Interfaces           | ✅ Done    | Define structure for objects and contracts.             |
-| 3. Classes              | ✅ Done    | Blueprint for creating objects with methods & props.    |
-| 4. Enums                | ✅ Done    | Set of named constants; usable as objects in JS.        |
-| 5. Generics             | ✅ Done    | Create flexible, reusable components with types.        |
-| 6. Type Guards          | ✅ Done    | Runtime type check returning boolean on verification.   |
-| 7. Tuples               | ✅ Done    | Fixed-length arrays with typed elements.                |
-| 8. Union Types          | ✅ Done    | Combine multiple types into one.                        |
-| 9. Intersection Types   | ✅ Done    | Merge types by combining properties.                    |
-| 10. Literal Types       | ✅ Done    | Restrict types to specific values.                      |
-| 11. Nullable Types      | ✅ Done    | Allow types to be null or undefined.                    |
-| 12. Type Aliases        | ✅ Done    | Custom type definitions for readability.                |
-| 13. Mapped Types        | ✅ Done    | Transform types by iterating over properties.           |
-| 14. Conditional Types   | ✅ Done    | Types dependent on conditions.                          |
-| 15. Decorators          | ✅ Done    | Annotate and modify classes, functions, and properties. |
-| 16. Mixins              | Pending    | Combine multiple classes into one.                      |
-| 17. Utility Types       | 🚧 Ongoing | Built-in types for common type transformations.         |
-| 18. Advanced Types      | Pending    | Explore complex type patterns and techniques.           |
-| 19. Module Augmentation | ✅ Done    | Extend modules with additional features.                |
-| 20. Namespaces          | ✅ Done    | Organize code with logical grouping.                    |
-| 21. Advanced Generics   | ✅ Done    | Extend generics for complex use cases.                  |
+<details>
+<summary>Basic Features</summary>
+<p>These features form the foundation of TypeScript and are essential for any type-safe application.</p>
 
+1. **Type Annotations**: Define types for variables, parameters, and return values to leverage TypeScript's static type checking.
+    [Example 2](https://github.com/husni1992/TypeScript-advanced/blob/main/src/app/controllers/UserController.ts)
+2. **Interfaces**: Create contracts for object structures, ensuring adherence to specified shapes.
+3. **Classes**: Use object-oriented principles to construct objects with properties and methods.
+4. **Enums**: Enumerate a set of named constants to improve code readability and maintainability.
+5. **Type Aliases**: Create custom type definitions to simplify complex type signatures and enhance code readability.
+6. **Nullable Types**: Work with values that may be `null` or `undefined`, denoted with a `?` for optional properties and variables.
+
+</details>
+
+<details>
+<summary>Intermediate Features</summary>
+<p>Intermediate features introduce more flexibility and reusability in types, commonly used in applications with moderate complexity.</p>
+
+7. **Union Types**: Allow for a value to be one of several types, providing versatility in variable and function typing.
+8. **Intersection Types**: Combine types into one by merging their properties, creating a new type that has all the properties of the constituent types.
+9. **Generics**: Design flexible and reusable components by creating types that work over a variety of values while maintaining type integrity.
+10. **Type Guards**: Apply runtime checks to determine the type of a variable and narrow its type within scope.
+11. **Tuples**: Utilize fixed-length arrays with elements whose types are known, but not necessarily the same.
+12. **Literal Types**: Constrain variables to specific values, offering a way to signal intent and enforce function contracts.
+13. **Utility Types**: Leverage TypeScript's built-in utility types for common transformations and operations on types.
+14. **Namespaces**: Structure code with logical grouping and prevent pollution of the global scope.
+</details>
+
+<details>
+<summary>Advanced Features</summary>
+<p>Advanced features involve complex type manipulation and are used to write more abstract, flexible, and reusable code, often utilized in library/framework development.</p>
+
+15. **Mapped Types**: Generate new types by transforming existing ones, iterating over their properties and applying modifications.
+16. **Conditional Types**: Define types that are determined based on conditional logic, allowing for types to change based on the input types.
+17. **Decorators**: Functions that modify class, method, property, or parameter behavior and metadata at compile or runtime.
+18. **Mixins**: Create classes that combine multiple classes or interfaces into one.
+19. **Module Augmentation**: Enhance or modify existing modules by adding new properties or methods.
+20. **Advanced Generics**: Utilize generics to create highly reusable components capable of handling complex typing scenarios.
+21. **Template Literals**: Use template literal types to construct types based on template literal strings, introducing string manipulation capabilities into the type system.
+</details>
 
 ## 💡 Side Note
+
 Think of this project as your practical guide to TypeScript. It showcases TypeScript features in action, although it might not always stick to Node.js API application best practices.
