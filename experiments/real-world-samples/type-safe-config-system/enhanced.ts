@@ -1,5 +1,4 @@
-//chat.openai.com/g/g-8kZJ1Ni5t-tech-mentor/c/a23bff7e-7e04-49fe-b677-2865fbddd469
-
+// Type definition for the configuration object
 type Config = {
   v: number;
   database: {
@@ -40,9 +39,11 @@ export const config: Config = {
   },
 };
 
-// type ConfigKey = `${string}.${string}`;
+// Type for specifying the keys in the configuration object
+// Supports nested keys up to two levels deep
 type ConfigKey = keyof Config | `${keyof Config}.${string}` | `${keyof Config}.${string}.${string}`;
 
+// Type for inferring the value type at a given key path in the configuration object
 type ConfigValueType<K extends ConfigKey> = K extends `${infer T}.${infer U}` // T is 'database' . U is 'host'
   ? T extends keyof Config // if 'database' is a key of Config
     ? U extends keyof Config[T] // if 'host' is key of Config['database']
@@ -75,6 +76,7 @@ export function getConfigValue<K extends ConfigKey>(key: K, _config: Config): Co
   return result;
 }
 
+// Usage examples with inferred types
 const dbHost = getConfigValue("database.host", config); // Correct, type string
 const serverPort = getConfigValue("server.port", config); // Correct, type number
 const newFeatureEnabled = getConfigValue("featureFlags.newFeature", config); // Correct, type boolean

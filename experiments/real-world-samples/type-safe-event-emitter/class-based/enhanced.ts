@@ -20,6 +20,7 @@ interface EventDataMap {
   [EventTypes.ACCESS_DENIED]: UnknownUser;
 }
 
+// This can be used instead of EventDataMap, it's a different approach.
 type ReturnTypeOfEvent<T extends EventTypes> = T extends EventTypes.ACCESS_DENIED
   ? UnknownUser
   : T extends EventTypes.LOGIN
@@ -54,7 +55,7 @@ export class EventEmitter {
   }
 }
 
-// Usage example (this should be type-safe after your refactoring)
+// Usage example with type safety
 const emitter = new EventEmitter();
 emitter.on(EventTypes.LOGIN, (user) => console.log(`User logged in: ${user.name}`));
 emitter.on(EventTypes.LOGOUT, (user) => console.log(`User logged in: ${user.name}`));

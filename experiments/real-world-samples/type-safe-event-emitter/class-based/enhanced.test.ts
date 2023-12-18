@@ -1,4 +1,4 @@
-import { EventEmitter, EventTypes } from "./after";
+import { EventEmitter, EventTypes } from "./enhanced";
 
 describe("EventEmitter", () => {
   const emitter = new EventEmitter();

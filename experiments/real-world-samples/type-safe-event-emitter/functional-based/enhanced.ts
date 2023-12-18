@@ -43,3 +43,5 @@ _person.on("ageChanged", (newAge) => {
     console.warn("Warning! Negative age");
   }
 });
+
+export {};

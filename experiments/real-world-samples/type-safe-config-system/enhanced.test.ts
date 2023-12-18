@@ -1,4 +1,4 @@
-import { config, getConfigValue } from "./config-tool.after";
+import { config, getConfigValue } from "./enhanced";
 
 describe("Get config value", () => {
   it("should return database.host", () => {
