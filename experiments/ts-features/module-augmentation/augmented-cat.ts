@@ -8,5 +8,3 @@ declare module "./Cat" {
     meow(): string;
   }
 }
-
-export default Cat;

@@ -2,14 +2,16 @@
 
 TypeScript has become an essential tool in modern web development, empowering developers to write more maintainable and error-resistant code. This repository is your one-stop shop for mastering TypeScript, covering everything from core concepts to advanced features. More than just theory, you'll find practical examples for every feature, encouraging experimentation and adaptation to your own projects. I welcome your feedback and contributions to make this a valuable resource for the entire TypeScript community.
 
-## Features We'll Explore
+### Easy Navigation
+To find examples and implementations of each TypeScript feature in this project, simply search by feature number. For instance, searching "feature #9" will lead you to examples and usage of Generics.
+
+### Features We'll Explore
 
 <details>
 <summary>Basic Features</summary>
-<p>These features form the foundation of TypeScript and are essential for any type-safe application.</p>
 
 1. **Type Annotations**: Define types for variables, parameters, and return values to leverage TypeScript's static type checking.
-    [Example 2](https://github.com/husni1992/TypeScript-advanced/blob/main/src/app/controllers/UserController.ts)
+   [Example 2](https://github.com/husni1992/TypeScript-advanced/blob/main/src/app/controllers/UserController.ts)
 2. **Interfaces**: Create contracts for object structures, ensuring adherence to specified shapes.
 3. **Classes**: Use object-oriented principles to construct objects with properties and methods.
 4. **Enums**: Enumerate a set of named constants to improve code readability and maintainability.
@@ -20,7 +22,6 @@ TypeScript has become an essential tool in modern web development, empowering de
 
 <details>
 <summary>Intermediate Features</summary>
-<p>Intermediate features introduce more flexibility and reusability in types, commonly used in applications with moderate complexity.</p>
 
 7. **Union Types**: Allow for a value to be one of several types, providing versatility in variable and function typing.
 8. **Intersection Types**: Combine types into one by merging their properties, creating a new type that has all the properties of the constituent types.
@@ -34,7 +35,6 @@ TypeScript has become an essential tool in modern web development, empowering de
 
 <details>
 <summary>Advanced Features</summary>
-<p>Advanced features involve complex type manipulation and are used to write more abstract, flexible, and reusable code, often utilized in library/framework development.</p>
 
 15. **Mapped Types**: Generate new types by transforming existing ones, iterating over their properties and applying modifications.
 16. **Conditional Types**: Define types that are determined based on conditional logic, allowing for types to change based on the input types.

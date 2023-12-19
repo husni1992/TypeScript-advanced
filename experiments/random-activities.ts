@@ -229,6 +229,8 @@ type Person = {
 
 const p1 = new Result<Person>({ age: 31, name: "husnyh" });
 
+// ******* Play with Partials *********
+
 // Atleast one mandatory Partial
 
 type AtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
@@ -249,7 +251,45 @@ let u: UserWithAtLeastOneField = {
   email: "asas",
 };
 
-// Function can be defined with a type or an interface both
+type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
+  ? Omit<Partial<T>, Keys> & Required<Pick<T, Keys>>
+  : never;
+
+type RequireAtLeastOneV2<T, Keys extends keyof T> = Omit<Partial<T>, Keys> &
+  Required<Pick<T, Keys>>;
+
+type RequireOneV3 = Omit<
+  Partial<UserTypes.IUser>,
+  "id" | "name" | "role" | "contact" | "hobbies" | "status"
+> &
+  Required<Pick<UserTypes.IUser, "id" | "name" | "role" | "contact" | "hobbies" | "status">>;
+
+type RequireAtLeastOneV4 =
+  | Required<Pick<UserTypes.IUser, "id">>
+  | Required<Pick<UserTypes.IUser, "name">>
+  | Required<Pick<UserTypes.IUser, "role">>
+  | Required<Pick<UserTypes.IUser, "contact">>
+  | Required<Pick<UserTypes.IUser, "hobbies">>
+  | Required<Pick<UserTypes.IUser, "status">>;
+
+type RequireAtLeastOneV5<T, Keys extends keyof T = keyof T> = Keys extends keyof T
+  ? Required<Pick<T, Keys>>
+  : never;
+
+let __r: RequireAtLeastOne<UserTypes.IUser, "name" | "id"> = {
+  id: "someid",
+};
+
+type SelectivePartial<T, keys extends keyof T> = Pick<Partial<T>, keys>;
+
+let mp: SelectivePartial<UserTypes.IUser, "id" | "name"> = {
+  id: "sas",
+  name: "sad",
+};
+
+// ******* End of Play with Partials *********
+
+// Hybrid Type: Function can be defined with a type or an interface both
 type GreetingFunctionType = (name: string) => string;
 interface GreetingFunctionInterface {
   (name: string): string;
@@ -366,21 +406,3 @@ type BinaryOperationByType = (operand1: number, operand2: number) => number;
 // the both of above gives same output
 const add1: BinaryOperationByInterface = (x, y) => x + y;
 const add2: BinaryOperationByType = (x, y) => x + y;
-
-//  ex3 Hybrid Types
-interface Counter {
-  interval: number;
-  reset(): void;
-  (start: number): string;
-}
-
-function getCounter() {
-  const m = function(start: number){
-
-  }
-
-  m.
-}
-
-let r = getCounter();
- 
