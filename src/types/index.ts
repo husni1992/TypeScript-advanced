@@ -28,20 +28,18 @@ let updateUser: GenericPartialType<UserTypes.IUser, "id"> = {
 
 // This generic type is a variant of built-in Partial,
 // but with at-least one property mandatory
-// feature #8 Intersection Types combines types into one by merging their properties and creating a new type.
 // feature #15 Mapped Types generate new types by transforming existing ones, iterating over their properties and applying modifications
 // feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
 export type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Keys extends keyof T
-  ? Omit<Partial<T>, Keys> & Required<Pick<T, Keys>>
+  ? Required<Pick<T, Keys>>
   : never;
-
 
 // This ensures at-least one property of UserTypes.IUser is assigned.
 let example1: RequireAtLeastOne<UserTypes.IUser> = {
-  name: "foo"
+  name: "foo",
 };
 
 // Makes all properties optional except id
 let example2: RequireAtLeastOne<UserTypes.IUser, "id"> = {
-  id: "011"
+  id: "011",
 };
