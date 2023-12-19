@@ -7,9 +7,6 @@ import { featureFlagInstance } from "../../config/featureFlags";
 const router = express.Router();
 const userController = new UserController();
 
-// Param middleware that will run for every route that includes the :id param
-// router.param("id", userController.preloadUser);
-
 router.use(authUser);
 
 const rateLimitEnabled = featureFlagInstance.getFlag("ENABLE_RATE_LIMIT").enabled;

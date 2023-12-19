@@ -24,14 +24,13 @@ export class UserController {
       return;
     }
 
-    // Create a new User instance
-    const { id, name, contact, role, hobbies, status } = req.body;
-    const newUser = new User(id, name, contact, role, hobbies, status);
+    const newUser = req.body;
 
     if (!User.isUser(newUser)) {
       res.status(400).send("Invalid user data!");
       return;
     }
+    // feature #10 If this place is reached, the newUser is verified through a type guard at line 29, and it is type safe here.
 
     const createdUser = await this.userService.create(newUser);
     res.status(201).json(createdUser);

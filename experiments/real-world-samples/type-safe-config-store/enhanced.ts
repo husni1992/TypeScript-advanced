@@ -1,3 +1,7 @@
+// TODO: add the TS features used in this file
+// This implementation might look like reinventing the wheel, but this is just for demonstration purpose.
+// There are plenty of libraries to handle configurations
+
 // Type definition for the configuration object
 type Config = {
   v: number;

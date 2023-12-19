@@ -3,6 +3,7 @@
 TypeScript has become an essential tool in modern web development, empowering developers to write more maintainable and error-resistant code. This repository is your one-stop shop for mastering TypeScript, covering everything from core concepts to advanced features. More than just theory, you'll find practical examples for every feature, encouraging experimentation and adaptation to your own projects. I welcome your feedback and contributions to make this a valuable resource for the entire TypeScript community.
 
 ### Easy Navigation
+
 To find examples and implementations of each TypeScript feature in this project, simply search by feature number. For instance, searching "feature #9" will lead you to examples and usage of Generics.
 
 ### Features We'll Explore
@@ -45,6 +46,6 @@ To find examples and implementations of each TypeScript feature in this project,
 21. **Template Literals**: Use template literal types to construct types based on template literal strings, introducing string manipulation capabilities into the type system.
 </details>
 
-## 💡 Side Note
+### 💡 Side Note
 
-Think of this project as your practical guide to TypeScript. It showcases TypeScript features in action, although it might not always stick to Node.js API application best practices.
+This project serves as a practical guide to TypeScript, focusing on demonstrating a wide range of TypeScript features from basic to advanced. While it showcases TypeScript features effectively, it might not always adhere to conventional best practices in aspects like API design, configuration management, authorization, error handling and etc. The main goal is to provide clear, isolated examples of TypeScript capabilities rather than presenting a model of a fully optimized application.
