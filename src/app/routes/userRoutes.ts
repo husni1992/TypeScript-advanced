@@ -1,5 +1,6 @@
 import express from "express";
 import rateLimit from "express-rate-limit";
+import asyncHandler from "express-async-handler";
 import { UserController } from "../controllers/UserController";
 import { authUser } from "../middlewares/userAuth";
 import { featureFlagInstance } from "../../config/featureFlags";
@@ -25,18 +26,21 @@ router.get("/users/getActiveUsers", userController.getActiveUsers);
 // Grouped route for /users/:id with chainable route handlers
 router
   .route("/users/:id")
-  .get(userController.getUser)
-  .put(userController.updateUser)
-  .delete(userController.deleteUser);
+  .get(asyncHandler(userController.getUser))
+  .put(asyncHandler(userController.updateUser))
+  .delete(asyncHandler(userController.deleteUser));
 
 // Specific sub-route for checking the auth level
-router.get("/users/:id/check-auth-level", userController.checkAvailableAuthLevelOfUser);
+router.get(
+  "/users/:id/check-auth-level",
+  asyncHandler(userController.checkAvailableAuthLevelOfUser),
+);
 
-router.get("/users/:id/getUserData", userController.getUserData);
+router.get("/users/:id/getUserData", asyncHandler(userController.getUserData));
 
 // Route for creating a user and adding hobbies
-router.route("/users").post(userController.createUser);
-router.post("/users/:id/hobbies", userController.addNewHobbies);
+router.route("/users").post(asyncHandler(userController.createUser));
+router.post("/users/:id/hobbies", asyncHandler(userController.addNewHobbies));
 
 // Catch-all for undefined routes
 router.use("*", (req, res) => {

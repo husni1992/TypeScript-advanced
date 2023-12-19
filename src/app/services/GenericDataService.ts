@@ -1,7 +1,7 @@
 import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 import { IDataService } from "../../data/interfaces/IDataService";
-
+import { UserNotFoundError } from "../errors/UserNotFoundError";
 // feature #3 Class is a blueprint for creating objects
 // feature #9 Generics enables reusable code for multiple data types with type safety
 export class GenericDataService<T> implements IDataService<T> {
@@ -25,7 +25,7 @@ export class GenericDataService<T> implements IDataService<T> {
     try {
       return this.repository.getById(id);
     } catch (err) {
-      throw new Error("Failed getting item by id!");
+      throw new UserNotFoundError(id);
     }
   }
 

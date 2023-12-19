@@ -5,6 +5,7 @@ import { MockCrudDatabase } from "../../data/Database";
 import { RequireRole } from "../../decorators/RequireRoleAuth";
 import { UserTypes } from "../../types/userTypes";
 import { featureFlagInstance } from "../../config/featureFlags";
+import { UserNotFoundError } from "../errors/UserNotFoundError";
 
 export class UserController {
   private mockDB = new MockCrudDatabase<User>();
@@ -18,8 +19,9 @@ export class UserController {
     }
 
     const userStatus = req.body.status;
-    const bol = User.isValidStatus(userStatus);
-    if (!bol) {
+    const isValidStatus = User.isValidStatus(userStatus);
+    if (!isValidStatus) {
+      // TODO: handle error
       res.status(400).send("Invalid status!");
       return;
     }
@@ -27,6 +29,7 @@ export class UserController {
     const newUser = req.body;
 
     if (!User.isUser(newUser)) {
+      // TODO: handle error
       res.status(400).send("Invalid user data!");
       return;
     }
@@ -45,13 +48,19 @@ export class UserController {
   updateUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { name, status } = req.body;
+
+    const userFound = await this.userService.getById(id);
+    if (!userFound) {
+      throw new UserNotFoundError(id);
+    }
+
     await this.userService.update(id, { name, status });
 
     res.status(200).send("User updated");
   };
 
   @RequireRole(UserTypes.Role.Admin)
-  async deleteUser(req: Request, res: Response): Promise<void> {
+  deleteUser(req: Request, res: Response): void {
     // Logic for deleting a user
     res.status(200).send("User deleted");
   }

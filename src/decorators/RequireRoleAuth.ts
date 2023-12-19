@@ -19,6 +19,7 @@ export function RequireRole(requiredRole: UserTypes.Role) {
       }
 
       if (req.currentUser.role !== requiredRole) {
+        // TODO: Use custom error class
         throw new Error("User does not have the required role");
       }
 
