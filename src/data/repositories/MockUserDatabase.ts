@@ -1,4 +1,4 @@
-import { IGenericDatabase, Query, Update } from "../interfaces/IGenericDatabase";
+import { IGenericDatabase, Query } from "../interfaces/IGenericDatabase";
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 import { genericDataFilter } from "../../utils/genericDataFilter";
 
@@ -21,32 +21,37 @@ export class MockUserDatabase<ItemType> implements IGenericDatabase<ItemType> {
       this.storage[index] = { ...this.storage[index], ...item };
       return this.storage[index];
     }
-    throw new Error("MockCrudDB: Item not found!");
+
+    throw new Error("Update failed: Item not found!");
   }
 
-  async updateOne(query: Query<ItemType>, update: Update<ItemType>) {
+  async updateOne(query: Query<ItemType>, update: Partial<ItemType>) {
     const foundItem = this.storage.find((item) => this.matchesQuery(item, query));
 
     if (!foundItem) {
       throw new Error("Item not found: " + JSON.stringify(query));
     }
 
-    if (update.$push) {
-      Object.entries(update.$push).forEach(([key, valuesToPush]) => {
-        const itemKey = key as keyof ItemType;
+    Object.entries(update).forEach(([key, value]) => {
+      const itemKey = key as keyof ItemType;
 
-        if (!Array.isArray(foundItem[itemKey])) {
-          throw new Error(`Field ${key} is not an array.`);
+      if (!foundItem[itemKey]) {
+        throw new Error(`Invalid field '${String(itemKey)}'`);
+      }
+
+      if (Array.isArray(foundItem[itemKey])) {
+        if (!Array.isArray(value)) {
+          throw new Error(`Expected an array for field '${String(itemKey)}'`);
         }
 
-        // Safely handling the array push operation
-        (foundItem[itemKey] as unknown[]).push(...(valuesToPush as unknown[]));
-      });
+        (foundItem[itemKey] as unknown[]).push(...(value as unknown[]));
+        return;
+      }
+
+      foundItem[itemKey] = value as NonNullable<ItemType>[keyof ItemType];
 
       return;
-    }
-
-    throw new Error("Update failed" + JSON.stringify(query) + JSON.stringify(update));
+    });
   }
 
   async delete(id: string | number): Promise<boolean> {

@@ -3,9 +3,6 @@ import { RequireAtLeastOne, GenericPartialType } from "../../types";
 // feature #13 Utility Types "Partial" constructs a type with all properties of Type set to optional
 export type Query<T> = Partial<Record<keyof T, any>>;
 
-// feature #6 Nullable Types, Optional property
-export type Update<T> = { $set?: Partial<T>; $push?: Partial<T> };
-
 /**
  * feature #2 Interface is what defines the structure of an object by specifying the properties and methods it should have.
  * Interface for CRUD operations on a database.
@@ -44,7 +41,7 @@ export interface IGenericDatabase<ItemType> {
    * @param update - Update operations to apply, with $set and $push options.
    * @returns A Promise that resolves to void after the update operation.
    */
-  updateOne(query: Query<ItemType>, update: Update<ItemType>): Promise<void>;
+  updateOne(query: Query<ItemType>, update: Partial<ItemType>): Promise<void>;
 
   /**
    * Deletes an item from the database.

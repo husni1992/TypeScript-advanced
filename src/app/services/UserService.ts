@@ -88,9 +88,7 @@ export class UserService {
     await this.repository.updateOne(
       { id },
       {
-        $push: {
-          hobbies,
-        },
+        hobbies,
       },
     );
   }
