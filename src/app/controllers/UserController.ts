@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { User, checkAvailableAuthLevelOfUser } from "../models/User";
 import { UserService } from "../services/UserService";
-import { MockCrudDatabase } from "../../data/Database";
+import { MockUserDatabase } from "../../data/repositories/MockUserDatabase";
 import { RequireRole } from "../../decorators/RequireRoleAuth";
 import { UserTypes } from "../../types/userTypes";
 import { featureFlagInstance } from "../../config/featureFlags";
-import { UserNotFoundError } from "../errors/UserNotFoundError";
-import { InvalidUserDataError } from "../errors";
+import { UserNotFoundError } from "../../errors/UserNotFoundError";
+import { InvalidUserDataError } from "../../errors";
 
 export class UserController {
-  private mockDB = new MockCrudDatabase<User>();
+  private mockDB = new MockUserDatabase<User>();
   private userService = new UserService(this.mockDB);
 
   createUser = async (req: Request, res: Response) => {

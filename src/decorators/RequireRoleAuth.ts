@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { UserTypes } from "../types/userTypes";
-import { UnauthorizedError } from "../app/errors/UnauthorizedError";
-import { UnauthenticatedError } from "../app/errors/Unauthenticated";
+import { UnauthorizedError } from "../errors/UnauthorizedError";
+import { UnauthenticatedError } from "../errors/Unauthenticated";
 
 // feature #17 Decorators are functions that modify class, method, property, or parameter behavior and metadata at compile or runtime.
 export function RequireRole(requiredRole: UserTypes.Role) {

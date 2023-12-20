@@ -3,7 +3,7 @@ import { ErrorStatusCodes } from "./HttpStatusCodes";
 
 export class UnauthorizedError extends AppError {
   constructor(privateMessage?: string) {
-    super("Unauthorized to perform this action", ErrorStatusCodes.FORBIDDEN, privateMessage);
+    super("Forbidden action", ErrorStatusCodes.FORBIDDEN, privateMessage);
   }
 
   serializeErrors(): { message: string; statusCode: number }[] {

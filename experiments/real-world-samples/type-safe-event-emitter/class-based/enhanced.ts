@@ -1,3 +1,5 @@
+// TODO: add the TS features used in this file
+
 export enum EventTypes {
   LOGIN = "LOGIN",
   LOGOUT = "LOGOUT",

@@ -1,9 +1,9 @@
 import express from "express";
 import rateLimit from "express-rate-limit";
 import asyncHandler from "express-async-handler";
-import { UserController } from "../controllers/UserController";
-import { authUser } from "../middlewares/userAuth";
-import { featureFlagInstance } from "../../config/featureFlags";
+import { UserController } from "../app/controllers/UserController";
+import { authUser } from "../app/middlewares/userAuth";
+import { featureFlagInstance } from "../config/featureFlags";
 
 const router = express.Router();
 const userController = new UserController();

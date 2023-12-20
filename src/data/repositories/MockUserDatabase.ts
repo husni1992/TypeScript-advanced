@@ -1,8 +1,8 @@
-import { IGenericDatabase, Query, Update } from "./interfaces/IGenericDatabase";
-import { RequireAtLeastOne, GenericPartialType } from "../types";
-import { genericDataFilter } from "../utils/genericDataFilter";
+import { IGenericDatabase, Query, Update } from "../interfaces/IGenericDatabase";
+import { RequireAtLeastOne, GenericPartialType } from "../../types";
+import { genericDataFilter } from "../../utils/genericDataFilter";
 
-export class MockCrudDatabase<ItemType> implements IGenericDatabase<ItemType> {
+export class MockUserDatabase<ItemType> implements IGenericDatabase<ItemType> {
   private storage: ItemType[] = [];
 
   async create(item: ItemType): Promise<ItemType> {

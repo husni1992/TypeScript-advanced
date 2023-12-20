@@ -1,15 +1,69 @@
-import { MockCrudDatabase } from "../../data/Database";
-import { GenericDataService } from "./GenericDataService";
 import { UserTypes } from "../../types/userTypes";
+import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
+import { GenericPartialType, RequireAtLeastOne } from "../../types";
+import { UserNotFoundError } from "../../errors";
 
 /**
  * feature #3 Class is a blueprint for creating objects
  * Service class for user-related operations, extending GenericService
  */
-export class UserService extends GenericDataService<UserTypes.IUser> {
-  constructor(repository: MockCrudDatabase<UserTypes.IUser>) {
-    super(repository);
+export class UserService {
+  protected repository: IGenericDatabase<UserTypes.IUser>;
+
+  constructor(repository: IGenericDatabase<UserTypes.IUser>) {
+    this.repository = repository;
   }
+
+  async create(item: UserTypes.IUser): Promise<UserTypes.IUser> {
+    try {
+      return this.repository.create(item);
+    } catch (err) {
+      // TODO: Refactor errors
+      throw new Error("Failed creating record!");
+    }
+  }
+
+  // feature #7 Union types allows for a value to be one of several types
+  async getById(id: string): Promise<UserTypes.IUser | undefined> {
+    // return this.items.find((item) => (item as any).id == id);
+    try {
+      return this.repository.getById(id);
+    } catch (err) {
+      throw new UserNotFoundError(id);
+    }
+  }
+
+  async update(
+    id: string,
+    item: GenericPartialType<UserTypes.IUser>,
+  ): Promise<UserTypes.IUser | undefined> {
+    try {
+      return this.repository.update(id, item);
+    } catch (err) {
+      throw new Error("Failed update!");
+    }
+  }
+
+  async delete(id: string): Promise<void> {
+    try {
+      await this.repository.delete(id);
+      console.log("Successfully deleted!");
+    } catch (err) {
+      throw new Error("Delete failed!");
+    }
+  }
+
+  async findByAttributes(
+    attributes: RequireAtLeastOne<UserTypes.IUser>,
+  ): Promise<UserTypes.IUser[]> {
+    try {
+      return this.repository.findByAttributes(attributes);
+    } catch (err) {
+      throw new Error("Failed getting item provided attributes!");
+    }
+  }
+
+  // existing are below
 
   /* 
     // feature #1 Type annotation is used to specify the data type of a variable, parameter, or return value explicitly
