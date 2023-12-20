@@ -1,9 +1,9 @@
 import { AppError } from "./AppError";
 import { ErrorStatusCodes } from "./HttpStatusCodes";
 
-export class UserNotFoundError extends AppError {
-  constructor(id: string) {
-    super(`User with id ${id} not found`, ErrorStatusCodes.NOT_FOUND);
+export class UnauthenticatedError extends AppError {
+  constructor(internalMessage?: string) {
+    super("User not authenticated!", ErrorStatusCodes.UNAUTHORIZED, internalMessage);
   }
 
   serializeErrors(): { message: string; statusCode: number }[] {

@@ -1,4 +1,4 @@
 import { UserNotFoundError } from "./UserNotFoundError";
-import { InvalidUserData } from "./InvalidUserDataError";
+import { InvalidUserDataError } from "./InvalidUserDataError";
 
-export { UserNotFoundError, InvalidUserData };
+export { UserNotFoundError, InvalidUserDataError };

@@ -1,9 +1,13 @@
 import { AppError } from "./AppError";
-import { ErrorStatusCodes } from "./StatusCodes";
+import { ErrorStatusCodes } from "./HttpStatusCodes";
 
-export class InvalidUserData extends AppError {
-  constructor(apiName: string) {
-    super(`Invalid user data in api ${apiName}`, ErrorStatusCodes.BAD_REQUEST);
+export class InvalidUserDataError extends AppError {
+  constructor(invalidFields?: string[], privateMessage?: string) {
+    super(
+      `Invalid user data received${invalidFields?.length ? `: ${invalidFields.join(", ")}` : "."}`,
+      ErrorStatusCodes.BAD_REQUEST,
+      privateMessage,
+    );
   }
 
   serializeErrors(): { message: string; statusCode: number }[] {
