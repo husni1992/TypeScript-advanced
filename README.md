@@ -48,4 +48,4 @@ To find examples and implementations of each TypeScript feature in this project,
 
 ### 💡 Side Note
 
-This project serves as a practical guide to TypeScript, focusing on demonstrating a wide range of TypeScript features from basic to advanced. While it showcases TypeScript features effectively, it might not always adhere to conventional best practices in aspects like API design, configuration management, authorization, error handling and etc. The main goal is to provide clear, isolated examples of TypeScript capabilities rather than presenting a model of a fully optimized application.
+This project serves as a practical guide to TypeScript, focusing on demonstrating a wide range of TypeScript features from basic to advanced. While it showcases TypeScript features effectively, it might not always adhere to conventional best practices and does not intend to provide production-ready solutions for aspects like API design, configuration management, authentication, or authorization. The primarily goal is to provide clear, isolated examples of TypeScript capabilities rather than presenting a model of a fully optimized application.
