@@ -406,3 +406,12 @@ type BinaryOperationByType = (operand1: number, operand2: number) => number;
 // the both of above gives same output
 const add1: BinaryOperationByInterface = (x, y) => x + y;
 const add2: BinaryOperationByType = (x, y) => x + y;
+
+// 20/12/2023
+// Literal Types
+const num: 43 = 43;
+const far: 1 | 2 | 3 = 3;
+
+// Template Literal Types
+type TemplateLiteralType<T extends string> = `Hello, ${T}!`;
+const g: TemplateLiteralType<"Husny"> = "Hello, Husny!";

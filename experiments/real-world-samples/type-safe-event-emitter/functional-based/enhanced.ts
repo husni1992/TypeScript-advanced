@@ -1,13 +1,15 @@
+// feature #12 Literal Types enable string values as valid return types
+// feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
 // feature #21 Template Literals used for defining types and string interpolation within backticks (`)
 
-type PropEventSource2<Type> = {
+type PropEventSource<Type> = {
   on<Key extends string & keyof Type>(
     eventName: `${Key}Changed`,
     callback: (newValue: Type[Key]) => void,
   ): void;
 };
 
-function makeWatchedObjectV2<Type>(obj: Type): Type & PropEventSource2<Type> {
+function makeWatchedObjectV2<Type>(obj: Type): Type & PropEventSource<Type> {
   const eventHandlers: Record<string, Function[]> = {};
 
   function on<Key extends string & keyof Type>(

@@ -1,4 +1,8 @@
-// TODO: add the TS features used in this file
+// feature #15 Mapped Types generate new types by transforming existing ones, iterating over their properties and applying modifications
+// feature #16 Conditional Types define types that are determined based on conditional logic, allowing for types to change based on the input types
+// feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
+// feature #21 Template Literals used for defining types and string interpolation within backticks (`)
+
 // This implementation might look like reinventing the wheel, but this is just for demonstration purpose.
 // There are plenty of libraries to handle configurations
 

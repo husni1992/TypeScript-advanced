@@ -1,4 +1,5 @@
-// TODO: add the TS features used in this file
+// feature #16 Conditional Types define types that are determined based on conditional logic, allowing for types to change based on the input types
+// feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
 
 export enum EventTypes {
   LOGIN = "LOGIN",
@@ -62,8 +63,8 @@ const emitter = new EventEmitter();
 emitter.on(EventTypes.LOGIN, (user) => console.log(`User logged in: ${user.name}`));
 emitter.on(EventTypes.LOGOUT, (user) => console.log(`User logged in: ${user.name}`));
 
-emitter.on(EventTypes.ACCESS_DENIED, (hacker) => {
-  console.log(hacker.browser);
+emitter.on(EventTypes.ACCESS_DENIED, (user) => {
+  console.log(user.browser);
 });
 
 emitter.emit(EventTypes.LOGIN, { name: "Alice", age: 30 });

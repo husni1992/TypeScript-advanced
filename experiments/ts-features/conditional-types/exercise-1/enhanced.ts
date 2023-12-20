@@ -1,8 +1,7 @@
-
 // This implementation demonstrates some complex use of Generics and Mapped Types in TypeScript
-//feature #16 Conditional Types define types that are determined based on conditional logic, allowing for types to change based on the input types
-//feature #9 Generics enables reusable code for multiple data types with type safety
-//feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
+// feature #16 Conditional Types define types that are determined based on conditional logic, allowing for types to change based on the input types
+// feature #9 Generics enables reusable code for multiple data types with type safety
+// feature #20 Advanced Generics enables more complex and flexible reusable code for multiple data types with type safety
 
 import { bookMock, dvdMock, magazineMock } from "../mocks";
 

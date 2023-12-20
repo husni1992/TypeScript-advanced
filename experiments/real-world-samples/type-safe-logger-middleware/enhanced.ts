@@ -1,4 +1,6 @@
-// TODO: add the TS features used in this file
+// feature #7 Union types allows for a value to be one of several types
+// feature #12 Literal Types enable string values as valid return types
+// feature Hybrid Types, the LoggingMiddleware interface is an example of Hybrid Type, acts both as a function and as an object
 
 import { Request, Response, NextFunction } from "express";
 
