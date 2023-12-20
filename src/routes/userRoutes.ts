@@ -11,7 +11,6 @@ const userController = new UserController();
 router.use(authUser);
 
 const rateLimitEnabled = featureFlagInstance.getFlag("ENABLE_RATE_LIMIT").enabled;
-console.log("Rate limit enabled: ", rateLimitEnabled);
 
 // Enable rate limiting
 const limiter = rateLimit({

@@ -21,8 +21,6 @@ class FeatureFlags {
   private flags: Record<Feature, FeatureDetails>;
 
   constructor(flags: Record<Feature, FeatureDetails> = featureFlags) {
-    console.log("Creating FeatureFlags instance...");
-
     this.flags = flags;
   }
 
