@@ -5,8 +5,6 @@ import { MockUserDatabase } from "../../data/repositories/MockUserDatabase";
 import { RequireAuthRole } from "../../decorators/requireAuthRole";
 import { UserTypes } from "../../types/userTypes";
 import { featureFlagInstance } from "../../config/featureFlags";
-import { UserNotFoundError } from "../../errors/UserNotFoundError";
-import { InvalidUserDataError } from "../../errors";
 
 export class UserController {
   private mockDB = new MockUserDatabase<User>();
