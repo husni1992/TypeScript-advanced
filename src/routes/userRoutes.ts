@@ -2,13 +2,13 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import asyncHandler from "express-async-handler";
 import { UserController } from "../app/controllers/UserController";
-import { authUser } from "../app/middlewares/userAuth";
+import { userAuth } from "../app/middlewares/userAuth";
 import { featureFlagInstance } from "../config/featureFlags";
 
 const router = express.Router();
 const userController = new UserController();
 
-router.use(authUser);
+router.use(userAuth);
 
 const rateLimitEnabled = featureFlagInstance.getFlag("ENABLE_RATE_LIMIT").enabled;
 

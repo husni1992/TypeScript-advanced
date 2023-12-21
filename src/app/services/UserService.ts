@@ -1,7 +1,8 @@
 import { UserTypes } from "../../types/userTypes";
 import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
 import { GenericPartialType, RequireAtLeastOne } from "../../types";
-import { UserNotFoundError } from "../../errors";
+import { User } from "../models/User";
+import { InvalidUserDataError, UserNotFoundError } from "../../errors";
 
 /**
  * feature #3 Class is a blueprint for creating objects
@@ -14,56 +15,58 @@ export class UserService {
     this.repository = repository;
   }
 
-  async create(item: UserTypes.IUser): Promise<UserTypes.IUser> {
-    try {
-      return this.repository.create(item);
-    } catch (err) {
-      // TODO: Refactor errors
-      throw new Error("Failed creating record!");
+  async create(item: any): Promise<UserTypes.IUser> {
+    if (!User.isUser(item)) {
+      throw new InvalidUserDataError();
     }
+    // feature #10 Type Guards: If this place is reached, the newUser is verified through a type guard function, and it is of type UserTypes.IUser
+
+    const [isValidEmailAddress, message] = User.isValidUserEmail(item.contact.email);
+    if (!isValidEmailAddress) {
+      throw new Error(message);
+    }
+
+    const userStatus = item.status;
+    const isValidStatus = User.isValidStatus(userStatus);
+    if (!isValidStatus) {
+      throw new InvalidUserDataError(["status"]);
+    }
+
+    return this.repository.create(item);
   }
 
-  // feature #7 Union types allows for a value to be one of several types
   async getById(id: string): Promise<UserTypes.IUser | undefined> {
-    // return this.items.find((item) => (item as any).id == id);
-    try {
-      return this.repository.getById(id);
-    } catch (err) {
-      throw new UserNotFoundError(id);
-    }
+    return this.repository.getById(id);
   }
 
   async update(
     id: string,
     item: GenericPartialType<UserTypes.IUser>,
   ): Promise<UserTypes.IUser | undefined> {
-    try {
-      return this.repository.update(id, item);
-    } catch (err) {
-      throw new Error("Failed update!");
+    const userFound = await this.getById(id);
+    if (!userFound) {
+      throw new UserNotFoundError(id);
     }
+
+    if (item.status) {
+      const isValidStatus = User.isValidStatus(item.status);
+      if (!isValidStatus) {
+        throw new InvalidUserDataError(["status"]);
+      }
+    }
+
+    return this.repository.update(id, item);
   }
 
   async delete(id: string): Promise<void> {
-    try {
-      await this.repository.delete(id);
-      console.log("Successfully deleted!");
-    } catch (err) {
-      throw new Error("Delete failed!");
-    }
+    await this.repository.delete(id);
   }
 
   async findByAttributes(
     attributes: RequireAtLeastOne<UserTypes.IUser>,
   ): Promise<UserTypes.IUser[]> {
-    try {
-      return this.repository.findByAttributes(attributes);
-    } catch (err) {
-      throw new Error("Failed getting item provided attributes!");
-    }
+    return this.repository.findByAttributes(attributes);
   }
-
-  // existing are below
 
   /* 
     // feature #1 Type annotation is used to specify the data type of a variable, parameter, or return value explicitly

@@ -3,8 +3,8 @@
 // feature Hybrid Types, the LoggingMiddleware interface is an example of Hybrid Type, acts both as a function and as an object
 
 import { Request, Response, NextFunction } from "express";
-type LogLevel = "DEBUG" | "INFO" | "WARNING" | "ERROR" | "FATAL" | "TRACE" | "EMERGENCY";
 
+type LogLevel = "DEBUG" | "INFO" | "WARNING" | "ERROR" | "FATAL" | "TRACE" | "EMERGENCY";
 
 // Define the hybrid type for the middleware
 interface LoggingMiddleware {

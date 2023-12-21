@@ -4,7 +4,7 @@ import { UnauthorizedError } from "../errors/UnauthorizedError";
 import { UnauthenticatedError } from "../errors/Unauthenticated";
 
 // feature #17 Decorators are functions that modify class, method, property, or parameter behavior and metadata at compile or runtime.
-export function RequireRole(requiredRole: UserTypes.Role) {
+export function RequireAuthRole(requiredRole: UserTypes.Role) {
   return function (
     target: Object,
     methodName: string,
@@ -23,7 +23,6 @@ export function RequireRole(requiredRole: UserTypes.Role) {
         );
       }
 
-      // return originalMethod.apply(this, args);  // either way will work, but make the param for descriptor ""...args: any[]"
       return originalMethod.call(this, req, res);
     };
 

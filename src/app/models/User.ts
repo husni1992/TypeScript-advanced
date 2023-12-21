@@ -14,7 +14,6 @@ export class User implements UserTypes.IUser {
   // feature #10 Type Guards are Functions that check and narrow variable types, whether at runtime or compile time
   static isUser(obj: any): obj is User {
     return (
-      typeof obj.id === "string" &&
       typeof obj.name === "string" &&
       typeof obj.contact.email === "string" &&
       typeof obj.contact.phoneNumber === "string" &&

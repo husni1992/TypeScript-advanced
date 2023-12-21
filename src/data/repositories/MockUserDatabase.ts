@@ -1,13 +1,17 @@
+import { v4 as uuidv4 } from "uuid";
 import { IGenericDatabase, Query } from "../interfaces/IGenericDatabase";
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 import { genericDataFilter } from "../../utils/genericDataFilter";
 
+// feature #3 Class is a blueprint for creating objects
 export class MockUserDatabase<ItemType> implements IGenericDatabase<ItemType> {
   private storage: ItemType[] = [];
 
   async create(item: ItemType): Promise<ItemType> {
-    this.storage.push(item);
-    return item;
+    const newUser = { id: uuidv4(), ...item };
+    this.storage.push(newUser);
+
+    return newUser;
   }
 
   async getById(id: string | number): Promise<ItemType | undefined> {
@@ -47,7 +51,6 @@ export class MockUserDatabase<ItemType> implements IGenericDatabase<ItemType> {
         (foundItem[itemKey] as unknown[]).push(...(value as unknown[]));
         return;
       }
-
       foundItem[itemKey] = value as NonNullable<ItemType>[keyof ItemType];
 
       return;
