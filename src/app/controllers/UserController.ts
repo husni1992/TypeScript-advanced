@@ -33,6 +33,7 @@ export class UserController {
   };
 
   @RequireAuthRole(UserTypes.Role.Admin)
+  // @loggedMethod()
   deleteUser(req: Request, res: Response) {
     console.log({ req: req.params });
 

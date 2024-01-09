@@ -11,7 +11,10 @@ import { UserTypes } from "./userTypes";
 declare global {
   namespace Express {
     export interface Request {
-      currentUser: UserTypes.IUser & { isAuthenticated?: string; userRole?: string };
+      currentUser: UserTypes.IUser & {
+        isAuthenticated?: string;
+        userRole?: string;
+      };
     }
   }
 }

@@ -36,7 +36,7 @@ export class EventEmitter {
   private listeners: Record<string, Function[]> = {};
 
   // Adds a listener for a specific event, you can also use (data: EventDataMap[T]) => void
-  on<T extends EventTypes>(eventName: T, listener: (data: EventDataMap[T]) => void): void {
+  on<T extends EventTypes>(eventName: T, listener: (data: ReturnTypeOfEvent<T>) => void): void {
     if (!this.listeners[eventName]) {
       this.listeners[eventName] = [];
     }
@@ -44,7 +44,7 @@ export class EventEmitter {
   }
 
   // Emits an event with data
-  emit<T extends EventTypes>(eventName: T, data: EventDataMap[T]): void {
+  emit<T extends EventTypes>(eventName: T, data: ReturnTypeOfEvent<T>): void {
     if (this.listeners[eventName]) {
       this.listeners[eventName].forEach((listener) => listener(data));
     }
@@ -60,7 +60,7 @@ export class EventEmitter {
 
 // Usage example with type safety
 const emitter = new EventEmitter();
-emitter.on(EventTypes.LOGIN, (user) => console.log(`User logged in: ${user.name}`));
+emitter.on(EventTypes.LOGIN, (data) => console.log(`User logged in: ${data.name}`));
 emitter.on(EventTypes.LOGOUT, (user) => console.log(`User logged in: ${user.name}`));
 
 emitter.on(EventTypes.ACCESS_DENIED, (user) => {

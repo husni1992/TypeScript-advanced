@@ -3,6 +3,7 @@ import { IGenericDatabase } from "../../data/interfaces/IGenericDatabase";
 import { GenericPartialType, RequireAtLeastOne } from "../../types";
 import { User } from "../models/User";
 import { InvalidUserDataError, UserNotFoundError } from "../../errors";
+import { loggedMethod } from "../../decorators/loggedMethod";
 
 /**
  * feature #3 Class is a blueprint for creating objects
@@ -86,6 +87,7 @@ export class UserService {
     return input;
   }
 
+  @loggedMethod('Foo')
   // feature #1 Type annotation is used to specify the data type of a variable, parameter, or return value explicitly
   async addNewHobbies(id: string, hobbies: string[]): Promise<void> {
     await this.repository.updateOne(

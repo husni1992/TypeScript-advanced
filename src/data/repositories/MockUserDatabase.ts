@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { IGenericDatabase, Query } from "../interfaces/IGenericDatabase";
+import { IGenericDatabase } from "../interfaces/IGenericDatabase";
 import { RequireAtLeastOne, GenericPartialType } from "../../types";
 import { genericDataFilter } from "../../utils/genericDataFilter";
 
@@ -29,7 +29,7 @@ export class MockUserDatabase<ItemType> implements IGenericDatabase<ItemType> {
     throw new Error("Update failed: Item not found!");
   }
 
-  async updateOne(query: Query<ItemType>, update: Partial<ItemType>) {
+  async updateOne(query: Partial<ItemType>, update: Partial<ItemType>) {
     const foundItem = this.storage.find((item) => this.matchesQuery(item, query));
 
     if (!foundItem) {
@@ -62,12 +62,13 @@ export class MockUserDatabase<ItemType> implements IGenericDatabase<ItemType> {
     return true;
   }
 
+  // the attributes is an object, and must have atleast one field of ItemType
   async findByAttributes(attributes: RequireAtLeastOne<ItemType>): Promise<ItemType[]> {
     const result = genericDataFilter(this.storage, attributes);
     return result;
   }
 
-  private matchesQuery(item: ItemType, query: Query<ItemType>): boolean {
+  private matchesQuery(item: ItemType, query: Partial<ItemType>): boolean {
     return Object.entries(query).every(([key, value]) => item[key as keyof ItemType] === value);
   }
 }

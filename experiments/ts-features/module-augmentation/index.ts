@@ -9,3 +9,5 @@ cat1.meow();
 let cat2 = new Cat();
 cat2.type = CatType.Siamesecat;
 cat2.meow();
+
+export {};

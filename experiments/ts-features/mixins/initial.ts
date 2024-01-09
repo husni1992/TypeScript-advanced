@@ -10,10 +10,18 @@ class SingerWithDancer extends Dancer {
   }
 }
 
-class PerformingArtist extends SingerWithDancer {}
+class AuthorWithSingerAndDancer extends SingerWithDancer{
+  write(){
+    console.log('Writing')
+  }
+}
 
-const artist = new PerformingArtist();
+// class PerformingArtist extends SingerWithDancer {}
+
+const artist = new AuthorWithSingerAndDancer();
 artist.dance();
 artist.sing();
+artist.write
 
 export {};
+
